@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <drawable name="cyan">#00ffff</drawable>
+    <drawable name="black">#000000</drawable>
+    <color name="blue">#0483c8</color>
+    <color name="black">#000000</color>
+    <color name="gray">#e4e4e4</color>
+    <color name="gray_modu">#ff8c8c8c</color>
+    <color name="white">#ffffff</color>
+    <color name="deep_gray">#908e8e</color>
+
+</resources>
