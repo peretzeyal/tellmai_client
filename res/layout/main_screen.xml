@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -130,7 +130,6 @@
                     android:id="@+id/linearLayout_record"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="3sp"
                     android:gravity="center"
                     android:orientation="horizontal" >
 
@@ -165,6 +164,12 @@
                         android:textColor="#ffffff" />
                 </LinearLayout>
 
+                <ProgressBar
+                    android:id="@+id/duration_progressBar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" android:layout_marginBottom="3sp" android:max="45"/>
+
                 <TextView
                     android:id="@+id/severity_tv"
                     android:layout_width="wrap_content"
@@ -195,7 +200,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout_kind"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50sp"
                     android:orientation="horizontal" >
 
                     <Button
@@ -227,20 +232,27 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/LinearLayout01"
+                    android:id="@+id/LinearLayout_reply_email"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingTop="2sp" >
 
                     <CheckBox
                         android:id="@+id/allow_reply_cb"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="@string/main_allow_reply_text" />
+
+                    <Button
+                        android:id="@+id/change_email_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_change_email_button" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
-
     </LinearLayout>
 
     <LinearLayout

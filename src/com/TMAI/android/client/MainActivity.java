@@ -1,11 +1,9 @@
 package com.TMAI.android.client;
 
-import java.io.File;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,22 +12,21 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.TMAI.android.client.audio.AudioRecorder;
 import com.TMAI.android.client.connection.HttpRequest;
 import com.TMAI.android.client.data.MemoInfo;
 import com.TMAI.android.client.dialog.DialogUtils;
 import com.TMAI.android.client.gui.GuiUtils;
+import com.TMAI.android.client.gui.ProgressThread;
 import com.TMAI.android.client.gui.GuiUtils.RecordingButtonsState;
 import com.TMAI.android.client.prefs.Prefs;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.transfer.TransferManager;
 
 public class MainActivity extends BaseMainActivity{
 	private static final String TAG = "MainActivity";
@@ -50,7 +47,7 @@ public class MainActivity extends BaseMainActivity{
 		initGui();
 		guiUpdate();
 		
-		//HttpRequest.postData();
+		HttpRequest.postData();
 		
 /*	String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 		String fileName = "sunset.jpg";*/
@@ -118,7 +115,6 @@ public class MainActivity extends BaseMainActivity{
 			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 			public void afterTextChanged(Editable projectText) {
-				Log.d(TAG, "project name change");
 				projectID = projectText.toString();
 				guiUpdate();
 			}
@@ -130,7 +126,6 @@ public class MainActivity extends BaseMainActivity{
 			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 			public void afterTextChanged(Editable projectText) {
-				Log.d(TAG, "project name change");
 				projectName = projectText.toString();
 				guiUpdate();
 			}
@@ -161,9 +156,31 @@ public class MainActivity extends BaseMainActivity{
 			}
 		});
 
-		allowReply = (CheckBox) findViewById(R.id.allow_reply_cb);
+		final Button changeEmail = (Button) findViewById(R.id.change_email_button);
+		changeEmail.setOnClickListener(new OnClickListener() {
 
-		allowReply.setChecked(!Prefs.getContactEmail().equals(""));
+			public void onClick(View v) {
+				DialogUtils.createChangeEmailDialog(MainActivity.this);
+			}
+		});
+		
+		allowReply = (CheckBox) findViewById(R.id.allow_reply_cb);
+		allowReply.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked){
+					changeEmail.setVisibility(View.VISIBLE);
+				}
+				else{
+					changeEmail.setVisibility(View.INVISIBLE);
+				}
+			}
+		});
+		String currentEmail = Prefs.getContactEmail();
+		allowReply.setChecked(currentEmail!=null && !currentEmail.equals(""));
+
+		
 		sendButton = (Button) findViewById(R.id.send_button);
 		sendButton.setOnClickListener(new OnClickListener() {
 
@@ -227,19 +244,22 @@ public class MainActivity extends BaseMainActivity{
 		startButton = (ImageButton) findViewById(R.id.play_button);
 		stopButton = (ImageButton) findViewById(R.id.stop_button);
 		recordButton = (ImageButton) findViewById(R.id.record_button);
+		duraionProgressBar = (ProgressBar) findViewById(R.id.duration_progressBar);
 
 		GuiUtils.changeButtonState(MainActivity.this, RecordingButtonsState.DISABLED);
 
 		startButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				//context.getDatabasePath(name).getPath();
-				audioPlayer.playAudio(audioFolder+ADUIO_FILE_NAME, MainActivity.this);
+				int audioTime = audioPlayer.playAudio(audioFolder+ADUIO_FILE_NAME, MainActivity.this);
 				GuiUtils.changeButtonState(MainActivity.this, RecordingButtonsState.PLAYING);
+				GuiUtils.startDuraionProgressBarTimer(MainActivity.this, audioTime);
 			}
 		});
 
 		stopButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
+				GuiUtils.stopDuraionProgressBarTimer();
 				audioPlayer.stopAudio();
 				if (audioRecorder!=null){
 					try {
@@ -260,6 +280,8 @@ public class MainActivity extends BaseMainActivity{
 				if (audioRecorder!=null){
 					try {
 						audioRecorder.start();
+						//duraionProgressBar.setMax(AudioRecorder.connectionTimeOutPeriod);
+						GuiUtils.startDuraionProgressBarTimer(MainActivity.this, AudioRecorder.connectionTimeOutPeriod/1000);
 						GuiUtils.changeButtonState(MainActivity.this, RecordingButtonsState.RECORDING);
 					} catch (Exception e) {
 						Log.d(TAG, "problem recording "+e);
@@ -271,6 +293,7 @@ public class MainActivity extends BaseMainActivity{
 		});
 	}
 
+	   
 
 
 	@Override

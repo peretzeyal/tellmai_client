@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -49,6 +50,8 @@ public class BaseMainActivity extends Activity{
 	public ImageButton startButton;
 	public ImageButton stopButton;
 	public ImageButton recordButton;
+	public ProgressBar duraionProgressBar;
+	
 	//gui kind buttons
 	protected Button kind1Button;
 	protected Button kind2Button;
@@ -140,7 +143,7 @@ public class BaseMainActivity extends Activity{
 		memoInfo.setProjectID(projectID);
 		memoInfo.setProjectName(projectName);
 		String email = Prefs.getContactEmail();
-		if (email==null){
+		if (email==null||email.equals("")){
 			email = GeneralUtils.getNativeContactEmail(BaseMainActivity.this);
 		}
 		memoInfo.setEmail(email);

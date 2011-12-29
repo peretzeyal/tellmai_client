@@ -4,12 +4,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.MailTo;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.TMAI.android.client.R;
+import com.TMAI.android.client.gui.GuiUtils;
+import com.TMAI.android.client.prefs.Prefs;
+import com.TMAI.android.client.utils.GeneralUtils;
 
 public class DialogUtils {
 
@@ -52,6 +56,58 @@ public class DialogUtils {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
 				view.setText("");
+			}
+		});
+
+		alert.show();
+	}
+	
+	public static void createChangeEmailDialog(final Context context){
+		createChangeEmailDialog(context,"");
+	}
+	
+	/**
+	 * @param context
+	 * @param email - if the email is not empty it will be used in the displayed edit text
+	 * 					else the current saved email will be used(if one exists)
+	 */
+	public static void createChangeEmailDialog(final Context context,String email){
+		AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+		alert.setTitle(context.getString(R.string.input_change_email_title_text));
+		alert.setMessage(context.getString(R.string.input_change_email_message_text));
+
+		// Set an EditText view to get user input 
+		final EditText input = new EditText(context);
+		String currentEmail = Prefs.getContactEmail();
+		if (!email.equals("")){
+			currentEmail=email;
+		}
+		if (currentEmail!=null){
+			input.setText(currentEmail);
+		}
+		alert.setView(input);
+
+		alert.setPositiveButton(context.getString(R.string.input_ok_button), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				String email = input.getText().toString();
+				// return value
+				if(GeneralUtils.validateEmail(email)){
+					Prefs.setContactEmail(email);
+					createToast(context, context.getString(R.string.input_change_email_changed));
+				}
+				else{
+					//email not valid
+					createToast(context, context.getString(R.string.input_change_email_error));
+					//recall the dialog with the current invalid email
+					createChangeEmailDialog(context, email);
+				}
+			}
+		});
+
+		alert.setNegativeButton(context.getString(R.string.input_cancel_button), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Canceled.
 			}
 		});
 

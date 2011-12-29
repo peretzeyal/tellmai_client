@@ -108,15 +108,15 @@ public class HttpRequest {
         	post.setEntity(ent);
         	post.setURI(new URI("http://tmai.cloudshuffle.com"));*/
         	
-        	post.setHeader("Host","tmai.cloudshuffle.com");
-        	post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");
+/*        	post.setHeader("Host","tmai.cloudshuffle.com");
+        	post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");*/
         	//post.setHeader("Accept", "application/json");
-        	post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        	post.setHeader("Accept-Language","en-us,en;q=0.5");
+        	//post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+   /*     	post.setHeader("Accept-Language","en-us,en;q=0.5");
         	post.setHeader("Accept-Encoding","gzip, deflate");
         	post.setHeader("Accept-Charset","ISO-8859-1,utf-8;q=0.7,*;q=0.7");
         	post.setHeader("Connection","keep-alive");
-        	post.setHeader("Referer","http://tmai.cloudshuffle.com/");
+        	post.setHeader("Referer","http://tmai.cloudshuffle.com/");*/
 
         	HttpParams postParams = new BasicHttpParams();
         	
@@ -138,9 +138,9 @@ public class HttpRequest {
         	String statusLine = response.getStatusLine().toString();
             
         } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
+			Log.d(TAG, "problem stoping the record "+e);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+			Log.d(TAG, "problem stoping the record "+e);
         }
     } 
     

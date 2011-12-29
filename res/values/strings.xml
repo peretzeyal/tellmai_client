@@ -6,10 +6,8 @@
 	<!--general string-->
 	<string name="toast_connection_problem">You don\'t have an internet connection</string>
 	<string name="toast_file_was_uploaded_successfully">The Memo was Uploaded Successfully</string>
-	<string name="toast_file_was_not_uploaded_successfully">There is a problem uploading the file try again
-		later</string>
-	<string name="toast_retrieving_location_error">There is a problem retrieving your current location
-		try again later</string>
+	<string name="toast_file_was_not_uploaded_successfully">There is a problem uploading the file try again later</string>
+	<string name="toast_retrieving_location_error">There is a problem retrieving your current location try again later</string>
 
 
 
@@ -22,10 +20,11 @@
 	<!--tos location question-->
 	<string name="tos_title_text">TOS Screen</string>
 	<string name="tos_message_text">tos text here</string>
-	<string name="tos_enter_email_message_text">Providing email will allow the project management
-		to send replies to the memo</string>
+	<string name="tos_enter_email_message_text">Providing email will allow the project management to send replies to the memo</string>
 	<string name="tos_with_email_button">with Email</string>
 	<string name="tos_without_email_button">without Email</string>
+	<string name="tos_accept_button">Accept</string>
+	<string name="tos_reject_button">Reject</string>
 
 	<!--places screen-->
 	<string name="places_dialog_titel_text">Select a location from the list below</string>
@@ -41,7 +40,13 @@
 	<string name="input_ok_button">OK</string>
 	<string name="input_cancel_button">Cancel</string>
 
-
+	<!--change email popup-->
+	<string name="input_change_email_title_text">Change Email</string>
+	<string name="input_change_email_message_text">Please enter your email</string>
+	<string name="input_change_email_ok_button">OK</string>
+	<string name="input_change_email_ancel_button">Cancel</string>
+	<string name="input_change_email_changed">Your email was successfully changed</string>
+	<string name="input_change_email_error">Your email is not a valid email please try again</string>
 
 	<!--main screen-->
 	<string name="main_titel_text">Record and send a Memo</string>
@@ -52,7 +57,7 @@
 	<string name="main_start_button">Start</string>
 	<string name="main_stop_button">Stop</string>
 	<string name="main_record_button">Record</string>
-  
+
 	<string name="main_kind_1_button">Service</string>
 	<string name="main_kind_2_button">Products</string>
 	<string name="main_kind_3_button">General</string>
@@ -63,9 +68,8 @@
 		name="main_type_3_button">Type 3</string>
 	-->
 	<string name="main_allow_reply_text">Allow reply</string>
-
+	<string name="main_change_email_button">Change email</string>
 	<string name="main_send_button">Send</string>
-
 	<string name="main_error_start_audio">Problem starting audio recording</string>
 
 	<!--main screen labels-->

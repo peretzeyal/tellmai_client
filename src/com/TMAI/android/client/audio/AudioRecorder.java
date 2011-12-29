@@ -23,7 +23,7 @@ public class AudioRecorder {
 
 	private MainActivity mainActivity;
 	private static Timer connectionTimeOut;
-	private static int connectionTimeOutPeriod = 45000; //we only allow up to 45 sec recordings
+	public static int connectionTimeOutPeriod = 45000; //we only allow up to 45 sec recordings
 
 
 	/**
@@ -92,6 +92,7 @@ public class AudioRecorder {
 			recorder.stop();
 			recorder.release();
 		}
+		GuiUtils.stopDuraionProgressBarTimer();
 		closeTimer();
 		Log.d(TAG, "mainActivity end"+mainActivity);
 		

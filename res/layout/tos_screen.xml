@@ -41,11 +41,32 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout_tos_buttons"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/accept_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tos_accept_button" />
+
+        <Button
+            android:id="@+id/reject_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tos_reject_button" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/LinearLayout_email_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical" android:visibility="gone">
 
         <TextView
             android:id="@+id/email_message_tv"
@@ -70,7 +91,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center" >
+        android:gravity="center" android:visibility="gone">
 
         <Button
             android:id="@+id/without_email_button"
