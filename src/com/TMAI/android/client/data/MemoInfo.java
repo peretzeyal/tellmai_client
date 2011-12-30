@@ -11,7 +11,7 @@ public class MemoInfo {
 	private double longitude;
 	private boolean canReply;
 	private String fileUrl;
-	
+
 	public MemoInfo() {
 		super();
 		this.email = "";
@@ -39,7 +39,7 @@ public class MemoInfo {
 		this.canReply = canReply;
 		this.fileUrl = fileUrl;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -82,8 +82,15 @@ public class MemoInfo {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public boolean isCanReply() {
+	public boolean getCanReply() {
 		return canReply;
+	}
+	public String getCanReplyString() {
+		//yes = 2 , no = 3
+		if(canReply){
+			return "2";
+		}
+		return "3";
 	}
 	public void setCanReply(boolean canReply) {
 		this.canReply = canReply;

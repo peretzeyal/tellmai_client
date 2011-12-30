@@ -1,21 +1,35 @@
 package com.TMAI.android.client.connection;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
 
@@ -26,7 +40,51 @@ public class HttpRequest {
 	private static final String boundary = "-----------------------******";
 	private static final String newLine = "\r\n";
 	private static final int maxBufferSize = 4096;
+	
 
+
+	    public static void uploadUserPhoto() {
+	        HttpParams params = new BasicHttpParams();
+	        params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+	        DefaultHttpClient mHttpClient = new DefaultHttpClient(params);
+	        try {
+
+	            HttpPost httppost = new HttpPost("http://tmai.cloudshuffle.com/");
+
+	            MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);  
+	            multipartEntity.addPart("email", new StringBody(""));
+	            multipartEntity.addPart("name", new StringBody(""));
+	            multipartEntity.addPart("project_id", new StringBody("15"));
+	            multipartEntity.addPart("severity", new StringBody("5"));
+	            multipartEntity.addPart("latitude", new StringBody("5"));
+	            multipartEntity.addPart("longitude", new StringBody("5"));
+	            multipartEntity.addPart("can_reply", new StringBody("2"));
+	            multipartEntity.addPart("upload", new StringBody(""));
+	            multipartEntity.addPart("tags", new StringBody("5"));
+	            multipartEntity.addPart("upload_url", new StringBody("http://s3.amazonaws.com/tmai/recordings/torrent_2.txt"));
+
+	            httppost.setEntity(multipartEntity);
+
+	            mHttpClient.execute(httppost, new PhotoUploadResponseHandler());
+
+	        } catch (Exception e) {
+	            Log.e("error", e.getLocalizedMessage(), e);
+	        }
+	    }
+	    private static class PhotoUploadResponseHandler implements ResponseHandler {
+
+	        @Override
+	        public Object handleResponse(HttpResponse response)
+	                throws ClientProtocolException, IOException {
+
+	            HttpEntity r_entity = response.getEntity();
+	            String responseString = EntityUtils.toString(r_entity);
+	            Log.d("UPLOAD", responseString);
+
+	            return null;
+	        }
+
+	    }
 	
 /*	request = HttpRequest()
     post_data = '''{"email": "test2@test.com", "severity": %s, "id": "5","uploaded_type": %s,
@@ -95,7 +153,7 @@ public class HttpRequest {
             */
             
         	HttpClient client = new DefaultHttpClient();
-        	HttpPost post = new HttpPost("http://tmai.cloudshuffle.com/recordings");
+        	HttpPost post = new HttpPost("http://tmai.cloudshuffle.com/recordings/");
 /*        	post.setHeader("Accept", "application/json");
         	post.setHeader("User-Agent", "Apache-HttpClient/4.1 (java 1.5)");
         	post.setHeader("Host", "myhost.com");*/
@@ -108,35 +166,55 @@ public class HttpRequest {
         	post.setEntity(ent);
         	post.setURI(new URI("http://tmai.cloudshuffle.com"));*/
         	
-/*        	post.setHeader("Host","tmai.cloudshuffle.com");
-        	post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");*/
-        	//post.setHeader("Accept", "application/json");
-        	//post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-   /*     	post.setHeader("Accept-Language","en-us,en;q=0.5");
-        	post.setHeader("Accept-Encoding","gzip, deflate");
-        	post.setHeader("Accept-Charset","ISO-8859-1,utf-8;q=0.7,*;q=0.7");
-        	post.setHeader("Connection","keep-alive");
-        	post.setHeader("Referer","http://tmai.cloudshuffle.com/");*/
+//        	post.setHeader("Host","tmai.cloudshuffle.com");
+//        	post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0");
+//        	//post.setHeader("Accept", "application/json");
+//        	post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+//        	post.setHeader("Accept-Language","en-us,en;q=0.5");
+//        	post.setHeader("Accept-Encoding","gzip, deflate");
+//        	post.setHeader("Accept-Charset","ISO-8859-1,utf-8;q=0.7,*;q=0.7");
+//        	post.setHeader("Connection","keep-alive");
+//        	post.setHeader("Referer","http://tmai.cloudshuffle.com/");
 
         	HttpParams postParams = new BasicHttpParams();
         	
         	postParams.setParameter("email", "");
         	postParams.setParameter("name", "");
         	postParams.setParameter("project_id", "15");
-        	postParams.setParameter("severity", "1");
-        	postParams.setParameter("latitude", "222");
-        	postParams.setParameter("longitude", "333");
-        	postParams.setParameter("can_reply", "2");
+        	postParams.setParameter("severity", "5");
+        	postParams.setParameter("latitude", "5");
+        	postParams.setParameter("longitude", "5");
+        	postParams.setParameter("can_reply", "3");
         	postParams.setParameter("upload", "");
-        	postParams.setParameter("tags", "test");
+        	postParams.setParameter("tags", "5");
         	postParams.setParameter("upload_url", "http://s3.amazonaws.com/tmai/recordings/torrent_2.txt");
         	post.setParams(postParams);
+        	
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(10);
+            nameValuePairs.add(new BasicNameValuePair("email", ""));
+            nameValuePairs.add(new BasicNameValuePair("name", ""));
+            nameValuePairs.add(new BasicNameValuePair("project_id", "15"));
+            nameValuePairs.add(new BasicNameValuePair("severity", "5"));
+            nameValuePairs.add(new BasicNameValuePair("latitude", "5"));
+            nameValuePairs.add(new BasicNameValuePair("longitude", "5"));
+            nameValuePairs.add(new BasicNameValuePair("can_reply", "3"));
+            nameValuePairs.add(new BasicNameValuePair("upload", ""));
+            nameValuePairs.add(new BasicNameValuePair("tags", "5"));
+            nameValuePairs.add(new BasicNameValuePair("upload_url", "http://s3.amazonaws.com/tmai/recordings/torrent_2.txt"));
+
+            
+
+  
+            //post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        	
+        	
         	HttpResponse response = client.execute(post);
         	HttpEntity  entity   = response.getEntity();
-        	entity.consumeContent();
 
+            String responseString = EntityUtils.toString(entity);
+            Log.d("UPLOAD", responseString);
         	String statusLine = response.getStatusLine().toString();
-            
+
         } catch (ClientProtocolException e) {
 			Log.d(TAG, "problem stoping the record "+e);
         } catch (IOException e) {
@@ -156,7 +234,7 @@ public class HttpRequest {
 		"Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\n" +
 		"Keep-Alive: 300\n" +
 		"Connection: keep-alive\n" +
-		"Content-Type: multipart/form-data; boundary=" + boundary + "\n" +
+		"Content-Type: multipart/form-data; boundary=---------------------------1355210151131 Content-Length: 1122 -----------------------------1355210151131 Content-Disposition: form-data; name=\"email\" -----------------------------1355210151131 Content-Disposition: form-data; name=\"name\" 15 -----------------------------1355210151131 Content-Disposition: form-data; name=\"project_id\" -----------------------------1355210151131 Content-Disposition: form-data; name=\"severity\" 1 -----------------------------1355210151131 Content-Disposition: form-data; name=\"latitude\" 1 -----------------------------1355210151131 Content-Disposition: form-data; name=\"longitude\" 1 -----------------------------1355210151131 Content-Disposition: form-data; name=\"can_reply\" 2 -----------------------------1355210151131 Content-Disposition: form-data; name=\"upload\"; filename=\"\" Content-Type: application/octet-stream -----------------------------1355210151131 Content-Disposition: form-data; name=\"tags\" 1 -----------------------------1355210151131 Content-Disposition: form-data; name=\"upload_url\" http://s3.amazonaws.com/tmai/recordings/torrent_2.txt -----------------------------1355210151131--" +
 		"Content-Length: %s\n\n";
 	
 	private static final String header = 

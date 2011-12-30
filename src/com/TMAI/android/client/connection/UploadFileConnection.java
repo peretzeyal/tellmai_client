@@ -1,15 +1,13 @@
 package com.TMAI.android.client.connection;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
+import android.content.Context;
+
+import com.TMAI.android.client.utils.BuildInfo;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-
-import android.content.Context;
-import android.net.Uri;
 
 public class UploadFileConnection {
 
@@ -26,7 +24,11 @@ public class UploadFileConnection {
 			File uploadFile = new File(filePath+ fileName);
 			long fileSize = uploadFile.length();
 			
-			AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( ACCESS_KEY_ID, SECRET_KEY ) );
+			byte[] b1 = BuildInfo.getSU();
+			String b1String = new String(b1);
+			byte[] b2 = BuildInfo.getSP();
+			String b2String = new String(b2);
+			AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( b1String, b2String ) );
 			PutObjectRequest por = new PutObjectRequest( projectBucket, uploadFile.getName(), uploadFile);
 			s3Client.putObject( por );
 			String fileURL = s3URL+projectBucket+"/"+fileName;

@@ -18,9 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 
 import com.TMAI.android.client.audio.AudioRecorder;
+import com.TMAI.android.client.connection.FileUploader;
 import com.TMAI.android.client.connection.HttpRequest;
+import com.TMAI.android.client.connection.InfoConnection;
 import com.TMAI.android.client.data.MemoInfo;
 import com.TMAI.android.client.dialog.DialogUtils;
 import com.TMAI.android.client.gui.GuiUtils;
@@ -47,7 +50,12 @@ public class MainActivity extends BaseMainActivity{
 		initGui();
 		guiUpdate();
 		
-		HttpRequest.postData();
+		//FileUploader.excutePost("http://tmai.cloudshuffle.com/recordings");
+		//HttpRequest.postData();
+		
+/*		FileUploader vidUploader = new FileUploader("http://tmai.cloudshuffle.com/recordings", audioFolder+ADUIO_FILE_NAME);
+		vidUploader.run();*/
+		//HttpRequest.uploadUserPhoto();
 		
 /*	String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 		String fileName = "sunset.jpg";*/
@@ -204,6 +212,16 @@ public class MainActivity extends BaseMainActivity{
 
 
 		severityRatingBar = (RatingBar) findViewById(R.id.severity_ratingBar);
+		severityRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				if(rating==0){
+					//don't allow 0 rating
+					ratingBar.setRating(1);
+				}
+			}
+		});
 		
 /*		type1Button = (Button) findViewById(R.id.type_1_button);
 		type2Button = (Button) findViewById(R.id.type_2_button);
