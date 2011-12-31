@@ -18,7 +18,7 @@ import android.widget.Button;
 import com.TMAI.android.client.prefs.Prefs;
 import com.TMAI.android.client.utils.GeneralUtils;
 
-public class TosActivity extends Activity{
+public class TosActivity extends BaseAppActivity{
 	private static final String TAG = "TosActivity";
 
 	

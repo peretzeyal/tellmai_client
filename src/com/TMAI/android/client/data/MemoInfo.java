@@ -1,7 +1,11 @@
 package com.TMAI.android.client.data;
 
-public class MemoInfo {
+import java.io.Serializable;
 
+public class MemoInfo implements Serializable{
+
+	public static final String FILE_SUFFIX = ".mi";  
+	
 	private String email;
 	private String projectName;
 	private String projectID;

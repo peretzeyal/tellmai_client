@@ -27,7 +27,7 @@ import com.TMAI.android.client.dialog.DialogUtils;
 import com.TMAI.android.client.location.DeviceLocation;
 import com.TMAI.android.client.location.PlacesInRadius;
 
-public class LocationActivity extends Activity{
+public class LocationActivity extends BaseAppActivity{
 
 	public static final int LOCATION_ACTIVITY = 101;
 	public static final String LOCATION_NAME = "location_name";

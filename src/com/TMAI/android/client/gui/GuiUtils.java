@@ -1,15 +1,14 @@
 package com.TMAI.android.client.gui;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Date;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.text.format.DateFormat;
 import android.widget.Button;
 
 import com.TMAI.android.client.BaseMainActivity;
-import com.TMAI.android.client.MainActivity;
 
 public class GuiUtils {
 	private static final String TAG = "GuiUtils";
@@ -123,6 +122,15 @@ public class GuiUtils {
 		}*/
 	}
 	
+	/**
+	 * @param context
+	 * @return date and time at the format of dd-MM-yy,kk-mm-ss
+	 */
+	public static String getDateAndTime(Context context){
+		//String text = DateFormat.format("yyyy-MM-dd hh:mm:ss", new java.util.Date()).toString();
+		String text = DateFormat.format("dd-MM-yy,kk-mm-ss", new java.util.Date()).toString();
+		return text;
+	}
 	
 	public static String getSelectedButtonText(Button button){
 		return getSelectedButtonText(button,"");

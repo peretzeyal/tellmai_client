@@ -63,7 +63,7 @@ public class InfoConnection {
 			//execute post
 			HttpResponse response = client.execute(post);
 			HttpEntity  entity   = response.getEntity();
-
+			//TODO phrase incorrect answer
 			String responseString = EntityUtils.toString(entity);
 			Log.d(TAG, responseString);
 			return true;

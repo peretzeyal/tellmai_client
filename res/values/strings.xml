@@ -9,6 +9,9 @@
 	<string name="toast_file_was_not_uploaded_successfully">There is a problem uploading the file try again later</string>
 	<string name="toast_retrieving_location_error">There is a problem retrieving your current location try again later</string>
 
+	<!--notification screen-->
+	<string name="notification_upload_successfully_titel_text">TAMI</string>
+	<string name="notification_upload_successfully_msg_text">The memo was uploaded successfully</string>
 
 
 	<!--login screen-->
@@ -32,8 +35,6 @@
 	<string name="places_progress_dialog_title">Establishing connection</string>
 	<string name="places_progress_dialog_message">Connecting...</string>
 
-
-
 	<!--project id input popup-->
 	<string name="input_titel_text">Project ID</string>
 	<string name="input_message_text">Please enter a project id</string>
@@ -44,9 +45,16 @@
 	<string name="input_change_email_title_text">Change Email</string>
 	<string name="input_change_email_message_text">Please enter your email</string>
 	<string name="input_change_email_ok_button">OK</string>
-	<string name="input_change_email_ancel_button">Cancel</string>
+	<string name="input_change_email_cancel_button">Cancel</string>
 	<string name="input_change_email_changed">Your email was successfully changed</string>
 	<string name="input_change_email_error">Your email is not a valid email please try again</string>
+
+	<!--send another memo popup-->
+	<string name="input_another_memo_title_text">Memo being sent</string>
+	<string name="input_another_memo_msg_text">The application will be closed in 5 sec if you want to send another memo click Yes</string>
+	<string name="input_another_memo_yes_button">Yes</string>
+	<string name="input_another_memo_no_button">No</string>
+
 
 	<!--main screen-->
 	<string name="main_titel_text">Record and send a Memo</string>

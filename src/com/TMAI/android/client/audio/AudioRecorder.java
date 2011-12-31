@@ -64,7 +64,7 @@ public class AudioRecorder {
 		}
 		
 		//if file exists delete it
-		GeneralUtils.deleteAudioFile(path);
+		GeneralUtils.deleteFile(path);
 
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);

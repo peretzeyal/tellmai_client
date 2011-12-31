@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -85,7 +86,8 @@ public class MainActivity extends BaseMainActivity{
 				e.printStackTrace();
 			}
 		 }*/
-
+		//if the last time the connection was down
+		sendUnUploadedFiles(true);
 	}
 
 	@Override
@@ -193,9 +195,9 @@ public class MainActivity extends BaseMainActivity{
 		sendButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				//TODO upload info and file
-				MemoInfo memoInfo = createMemoInfo();
-				new uploadFileToServerTask().execute(memoInfo);
+				//save the current audio and MemoInfo files
+				DialogUtils.createAnotherMemoDialog(MainActivity.this);
+				savingAudioAndMemoInfoFiles();
 			}
 		});
 
@@ -328,4 +330,16 @@ public class MainActivity extends BaseMainActivity{
 			}
 		}
 	}
+	
+	
+	
+	 @Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		 if (keyCode == KeyEvent.KEYCODE_BACK) {
+			 closeApp();
+		 }
+		return super.onKeyDown(keyCode, event);
+	}
+
+
 }
