@@ -85,8 +85,15 @@ public class BaseMainActivity extends BaseAppActivity{
 		}
 	}
 
+	protected void resetProjectObjects(){
+		projectIDTV.setText("");
+		projectNameTV.setText("");
+		projectID="";
+		projectName="";
+		guiUpdate();
+	}
 
-
+	
 	/**
 	 * update the current gui according to project/recording state
 	 */
@@ -114,11 +121,10 @@ public class BaseMainActivity extends BaseAppActivity{
 	 */
 	protected void savingAudioAndMemoInfoFiles(){
 		MemoInfo memoInfo = createMemoInfo();
-		String newFileName = GuiUtils.getDateAndTime(BaseMainActivity.this)+","+projectID+projectName;
+		String newFileName = GuiUtils.getDateAndTime(BaseMainActivity.this)+"_"+projectID+projectName;
 		GeneralUtils.moveFile(audioFolder, ADUIO_FILE_NAME, oldAudioFolder, newFileName+ADUIO_FILE_SUFFIX);
 		GeneralUtils.saveMemoInfo(memoInfo, oldAudioFolder, newFileName+MemoInfo.FILE_SUFFIX);
-		//TODO reset all params
-		guiUpdate();
+		resetProjectObjects();
 		sendUnUploadedFiles(true);
 	}
 

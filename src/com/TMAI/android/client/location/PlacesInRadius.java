@@ -19,8 +19,8 @@ public class PlacesInRadius {
 
 	//private String result = "";  
 	private String googleAPIKey = "AIzaSyDept8zDAOUIUw4O-BQMx_cJvwr6iTI398"; 
-	private String searchRadius = "50000";
-	private String filter = "food";
+	private String searchRadius = "1000";
+	private String filter = "";
 	private Location myLocation;
 	final String TAG = getClass().getSimpleName();  
 

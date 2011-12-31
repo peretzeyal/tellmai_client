@@ -22,8 +22,8 @@ import com.TMAI.android.client.data.MemoInfo;
 public class GeneralUtils {
 	private static final String TAG = "GeneralUtils";
 
-	private static final String AUDIO_SUB_FOLDER = "/data/data/TAMI/";
-	private static final String OLD_AUDIO_SUB_FOLDER = "/data/data/TAMI/files/";
+	private static final String AUDIO_SUB_FOLDER = "/data/data/TMAI/";
+	private static final String OLD_AUDIO_SUB_FOLDER = "/data/data/TMAI/files/";
 
 	/**
 	 * @return String the audio folder to use for saving and reading audio files

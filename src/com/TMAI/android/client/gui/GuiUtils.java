@@ -124,11 +124,11 @@ public class GuiUtils {
 	
 	/**
 	 * @param context
-	 * @return date and time at the format of dd-MM-yy,kk-mm-ss
+	 * @return date and time at the format of dd-MM-yy_kk-mm-ss
 	 */
 	public static String getDateAndTime(Context context){
 		//String text = DateFormat.format("yyyy-MM-dd hh:mm:ss", new java.util.Date()).toString();
-		String text = DateFormat.format("dd-MM-yy,kk-mm-ss", new java.util.Date()).toString();
+		String text = DateFormat.format("dd-MM-yy_kk-mm-ss", new java.util.Date()).toString();
 		return text;
 	}
 	

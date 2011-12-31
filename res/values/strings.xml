@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">TAMI</string>
+	<string name="app_name">TMAI</string>
 
 	<!--general string-->
 	<string name="toast_connection_problem">You don\'t have an internet connection</string>
@@ -10,7 +10,7 @@
 	<string name="toast_retrieving_location_error">There is a problem retrieving your current location try again later</string>
 
 	<!--notification screen-->
-	<string name="notification_upload_successfully_titel_text">TAMI</string>
+	<string name="notification_upload_successfully_titel_text">TMAI</string>
 	<string name="notification_upload_successfully_msg_text">The memo was uploaded successfully</string>
 
 

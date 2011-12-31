@@ -47,6 +47,7 @@ public class MainActivity extends BaseMainActivity{
 		GuiUtils.handler = new Handler();
 		//get full audio file path
 		//currentAudioFileName = audioRecorder.getAudioFilePath();
+        Prefs.init(this);
 
 		initGui();
 		guiUpdate();
@@ -104,14 +105,6 @@ public class MainActivity extends BaseMainActivity{
 		initOptionGUIButtons();
 		initRecordGui();
 
-	}
-
-	private void resetProjectObjects(){
-		projectIDTV.setText("");
-		projectNameTV.setText("");
-		projectID="";
-		projectName="";
-		guiUpdate();
 	}
 	
 	/**

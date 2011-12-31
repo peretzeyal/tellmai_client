@@ -28,6 +28,7 @@ public class DialogUtils {
 	private static final String TAG = "DialogUtils";
 
 	private static Dialog dialog;
+	private static Timer timeOut;
 
 
 	public static void createToast(Context context, String msg){
@@ -134,9 +135,12 @@ public class DialogUtils {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// return value
 				dialog.cancel();
+				if(timeOut!=null){
+					timeOut.cancel();
+				}
 				BaseAppActivity.appInForeground = true;
-				activity.startActivity(new Intent(activity,MainActivity.class));
 				activity.finish();
+				activity.startActivity(new Intent(activity,MainActivity.class));
 			}
 		});
 
@@ -144,6 +148,9 @@ public class DialogUtils {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
 				//go to background
+				if(timeOut!=null){
+					timeOut.cancel();
+				}
 				BaseAppActivity.appInForeground = false;
 				activity.moveTaskToBack(true);
 			}
@@ -162,7 +169,7 @@ public class DialogUtils {
 		if(periodSec == -1){
 			return;
 		}
-		Timer timeOut = new Timer();
+		timeOut = new Timer();
 		timeOut.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -175,91 +182,4 @@ public class DialogUtils {
 		}, periodSec*1000);
 	}
 
-	/*	public static void createDialog(Context context,Set<Places> placesArray){
-		Dialog dialog = null;
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-		View mainLayout = inflater.inflate(R.layout.places_dialog, null);
-		LinearLayout listLayout = (LinearLayout) mainLayout.findViewById(R.id.places_dialog_linearLayout_list);
-		listLayout.removeAllViews();
-		Builder alertDialog = new AlertDialog.Builder(context);
-
-		for (Places places : placesArray) {
-			LinearLayout rowLayout = (LinearLayout) inflater.inflate(R.layout.places_dialog_row, null);
-			TextView phoneNumber = (TextView) rowLayout.findViewById(R.id.places_dialog_row_text_tv);
-			phoneNumber.setText(places.getName());
-			listLayout.addView(rowLayout);
-		}
-
-
-		dialog = alertDialog.create();
-		dialog.show();
-	}
-
-	public static void createDialog(Context context,List<Places> placesList) {
-		Builder alertDialog = new AlertDialog.Builder(context);
-		String title = context.getString(R.string.places_dialog_titel_text);
-		alertDialog.setTitle(title);
-
-		LayoutInflater mInflater = LayoutInflater.from(context);
-        View mainView = mInflater.inflate(R.layout.places_dialog, null);
-
-		LinearLayout numbersLayout = (LinearLayout) mainView.findViewById(R.id.places_dialog_linearLayout_list);
-		numbersLayout.removeAllViews();
-		LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		for (Places places : placesList) {
-				LinearLayout homeLayout = (LinearLayout) vi.inflate(R.layout.places_dialog_row, null);
-				TextView rowText = (TextView) homeLayout.findViewById(R.id.places_dialog_row_text_tv);
-				rowText.setText(places.getName());
-				OnClickListener homeListener = new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Log.d(TAG, "view selected"+v);
-					}
-				};
-				homeLayout.setOnClickListener(homeListener);
-				numbersLayout.addView(homeLayout);
-
-
-
-		}
-		alertDialog.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				if (dialog!=null){
-					dialog.dismiss();
-					dialog.cancel();
-				}					}
-		});
-		//cancel button selected
-		Button cancelBtn = (Button) mainView.findViewById(R.id.places_dialog_cancel_button);
-		cancelBtn.setOnClickListener(new OnClickListener() {
-
-			public void onClick(View v) {
-				if (dialog!=null){
-					dialog.dismiss();
-					dialog.cancel();
-				}
-
-			}
-		});
-
-		TextView t = (TextView) mainView.findViewById(R.id.select_phone_nr_not_found);
-		if (count == 0) {
-			t.setVisibility(View.VISIBLE);
-		}
-		else {
-			t.setVisibility(View.GONE);
-
-		}
-		//only one number return this number
-		if (count == 1) {
-			returnPhoneNrSelected(activity,contactPhoneDetails.numberList.get(0).number,resultCode);
-			return;
-
-		}
-		alertDialog.setView(mainView);
-		dialog = alertDialog.create();
-		alertDialog.show();
-	}*/
 }
