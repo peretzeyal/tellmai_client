@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/AndroidPad/!svn/ver/2/trunk/res/drawable-hdpi
+END
+network_connected_icon.png
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/AndroidPad/!svn/ver/16/trunk/res/drawable-hdpi/network_connected_icon.png
+END
+network_disconnected_icon.png
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/AndroidPad/!svn/ver/16/trunk/res/drawable-hdpi/network_disconnected_icon.png
+END
+icon.png
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/AndroidPad/!svn/ver/2/trunk/res/drawable-hdpi/icon.png
+END

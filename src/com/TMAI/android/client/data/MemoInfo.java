@@ -1,6 +1,7 @@
 package com.TMAI.android.client.data;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class MemoInfo implements Serializable{
 
@@ -27,21 +28,6 @@ public class MemoInfo implements Serializable{
 		this.longitude = 0;
 		this.canReply = false;
 		this.fileUrl = "";
-	}
-
-	public MemoInfo(String email, String projectName, String projectID,
-			String kind, int severity, double latitude, double longitude,
-			boolean canReply, String fileUrl) {
-		super();
-		this.email = email;
-		this.projectName = projectName;
-		this.projectID = projectID;
-		this.kind = kind;
-		this.severity = severity;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.canReply = canReply;
-		this.fileUrl = fileUrl;
 	}
 
 	public String getEmail() {
@@ -78,13 +64,15 @@ public class MemoInfo implements Serializable{
 		return latitude;
 	}
 	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+		DecimalFormat decimalFormat = new DecimalFormat("##.######");
+		this.latitude = Double.valueOf(decimalFormat.format(latitude));
 	}
 	public double getLongitude() {
 		return longitude;
 	}
 	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+		DecimalFormat decimalFormat = new DecimalFormat("##.######");
+		this.longitude = Double.valueOf(decimalFormat.format(longitude));
 	}
 	public boolean getCanReply() {
 		return canReply;

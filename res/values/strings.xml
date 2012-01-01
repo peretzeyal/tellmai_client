@@ -11,7 +11,9 @@
 
 	<!--notification screen-->
 	<string name="notification_upload_successfully_titel_text">TMAI</string>
-	<string name="notification_upload_successfully_msg_text">The memo was uploaded successfully</string>
+	<string name="notification_upload_successfully_msg_text">feedback to *** delivered</string>
+	<string name="notification_upload_successfully_project_id">business id</string>
+	<string name="notification_upload_successfully_project_name">business name</string>
 
 
 	<!--login screen-->
@@ -20,46 +22,46 @@
 	<string name="login_ok_button">OK</string>
 	<string name="login_cancel_button">Cancel</string>
 
-	<!--tos location question-->
+	<!--tos question-->
 	<string name="tos_title_text">TOS Screen</string>
 	<string name="tos_message_text">tos text here</string>
-	<string name="tos_enter_email_message_text">Providing email will allow the project management to send replies to the memo</string>
+	<string name="tos_enter_email_message_text">Providing email will allow the business management to send replies to the memo</string>
 	<string name="tos_with_email_button">with Email</string>
 	<string name="tos_without_email_button">without Email</string>
 	<string name="tos_accept_button">Accept</string>
 	<string name="tos_reject_button">Reject</string>
 
 	<!--places screen-->
-	<string name="places_dialog_titel_text">Select a location from the list below</string>
+	<string name="places_dialog_titel_text">Give your feedback to</string>
 	<string name="places_dialog_cancel_button">Cancel</string>
 	<string name="places_progress_dialog_title">Establishing connection</string>
 	<string name="places_progress_dialog_message">Connecting...</string>
 
 	<!--project id input popup-->
-	<string name="input_titel_text">Project ID</string>
-	<string name="input_message_text">Please enter a project id</string>
+	<string name="input_titel_text">Business ID</string>
+	<string name="input_message_text">Please enter a business id</string>
 	<string name="input_ok_button">OK</string>
 	<string name="input_cancel_button">Cancel</string>
 
 	<!--change email popup-->
 	<string name="input_change_email_title_text">Change Email</string>
-	<string name="input_change_email_message_text">Please enter your email</string>
-	<string name="input_change_email_ok_button">OK</string>
+	<string name="input_change_email_message_text"></string>
+	<string name="input_change_email_ok_button">Update</string>
 	<string name="input_change_email_cancel_button">Cancel</string>
 	<string name="input_change_email_changed">Your email was successfully changed</string>
 	<string name="input_change_email_error">Your email is not a valid email please try again</string>
 
 	<!--send another memo popup-->
-	<string name="input_another_memo_title_text">Memo being sent</string>
-	<string name="input_another_memo_msg_text">The application will be closed in 5 sec if you want to send another memo click Yes</string>
-	<string name="input_another_memo_yes_button">Yes</string>
+	<string name="input_another_memo_title_text">Feedback queued for delivery</string>
+	<string name="input_another_memo_msg_text">this app will automatically close in *** sec.\nTo send additional feedback click</string>
+	<string name="input_another_memo_yes_button">Send additional feedback</string>
 	<string name="input_another_memo_no_button">No</string>
 
 
 	<!--main screen-->
-	<string name="main_titel_text">Record and send a Memo</string>
-	<string name="main_enter_project">Enter Project Id</string>
-	<string name="main_select_project">Select Project from list</string>
+	<string name="main_titel_text">Record and send your feedback</string>
+	<string name="main_enter_project">Enter business Id</string>
+	<string name="main_select_project">Select business from list</string>
 
 
 	<string name="main_start_button">Start</string>
@@ -67,8 +69,10 @@
 	<string name="main_record_button">Record</string>
 
 	<string name="main_kind_1_button">Service</string>
-	<string name="main_kind_2_button">Products</string>
+	<string name="main_kind_2_button">Product</string>
 	<string name="main_kind_3_button">General</string>
+	
+	<string name="main_upload_button">Upload</string>
 	<!--
 
 		<string name="main_type_1_button">Type 1</string> <string
@@ -76,14 +80,14 @@
 		name="main_type_3_button">Type 3</string>
 	-->
 	<string name="main_allow_reply_text">Allow reply</string>
-	<string name="main_change_email_button">Change email</string>
+	<string name="main_change_email_button">Update email</string>
 	<string name="main_send_button">Send</string>
 	<string name="main_error_start_audio">Problem starting audio recording</string>
 
 	<!--main screen labels-->
-	<string name="main_label_severity">Please select the Severity and for tag your memo</string>
-	<string name="main_label_project_id">Project ID:</string>
-	<string name="main_label_project_name">Project Name:</string>
+	<string name="main_label_severity">Severity</string>
+	<string name="main_label_project_id">Business ID:</string>
+	<string name="main_label_project_name">Business Name:</string>
 
 	<!--server connection-->
 	<string name="upload_file_server_url"></string>

@@ -22,7 +22,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical" >
-
+ 
                 <LinearLayout
                     android:id="@+id/linearLayout_title"
                     android:layout_width="fill_parent"
@@ -36,7 +36,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/main_titel_text"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff" android:textSize="18sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10sp"
                             android:text="@string/main_label_project_id"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black" android:textSize="18sp"/>
 
                         <TextView
                             android:id="@+id/project_id_tv"
@@ -85,7 +85,7 @@
                             android:layout_marginLeft="10sp"
                             android:layout_marginRight="10sp"
                             android:text="@string/main_label_project_name"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black" android:textSize="18sp"/>
 
                         <TextView
                             android:id="@+id/project_name_tv"
@@ -133,35 +133,40 @@
                     android:gravity="center"
                     android:orientation="horizontal" >
 
-                    <ImageButton
-                        android:id="@+id/play_button"
+                    <LinearLayout
+                        android:id="@+id/linearLayout_audio"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_back"
-                        android:src="@drawable/play_button"
-                        android:text="@string/main_start_button"
-                        android:textColor="#ffffff" />
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal" android:layout_weight="1">
 
-                    <ImageButton
-                        android:id="@+id/stop_button"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_back"
-                        android:src="@drawable/stop_button"
-                        android:text="@string/main_stop_button"
-                        android:textColor="#ffffff" />
+                        <ImageButton
+                            android:id="@+id/play_button"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back"
+                            android:src="@drawable/play_button"
+                            android:text="@string/main_start_button"
+                            android:textColor="#ffffff" />
+
+                        <ImageButton
+                            android:id="@+id/stop_button"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_back"
+                            android:src="@drawable/stop_button"
+                            android:text="@string/main_stop_button"
+                            android:textColor="#ffffff" android:visibility="gone"/>
+                    </LinearLayout>
 
                     <ImageButton
                         android:id="@+id/record_button"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:background="@drawable/button_back"
                         android:src="@drawable/record_button"
                         android:text="@string/main_record_button"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff" android:layout_weight="1"/>
                 </LinearLayout>
 
                 <ProgressBar
@@ -178,7 +183,7 @@
                     android:layout_marginRight="10sp"
                     android:text="@string/main_label_severity"
                     android:textColor="@color/white"
-                    android:visibility="gone" />
+                    android:visibility="visible" android:textSize="18sp"/>
 
                 <LinearLayout
                     android:id="@+id/linearLayout_type"
@@ -194,14 +199,15 @@
                         android:isIndicator="false"
                         android:numStars="5"
                         android:rating="1"
-                        android:stepSize="1.0" />
+                        android:stepSize="1.0" android:progressDrawable="@drawable/rating_bar" android:max="5"/>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout_kind"
                     android:layout_width="fill_parent"
                     android:layout_height="50sp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/kind_1_button"
@@ -243,13 +249,13 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/main_allow_reply_text" />
+                        android:text="@string/main_allow_reply_text" android:textSize="18sp"/>
 
                     <Button
                         android:id="@+id/change_email_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/main_change_email_button" />
+                        android:text="@string/main_change_email_button" android:textSize="18sp"/>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
@@ -263,14 +269,24 @@
         android:gravity="bottom"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/send_button"
-            android:layout_width="fill_parent"
-            android:layout_height="40sp"
+        <LinearLayout
+            android:id="@+id/linearLayout_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_back"
-            android:text="@string/main_send_button"
-            android:textColor="#ffffff" />
+            android:orientation="vertical" android:gravity="bottom|center_horizontal">
+
+            <Button
+                android:id="@+id/send_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/upload_button_back"
+                android:text="@string/main_upload_button"
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -18,7 +18,7 @@ public class AudioRecorder {
 	private static final String TAG = "AudioRecorder";
 
 
-	final MediaRecorder recorder = new MediaRecorder();
+	MediaRecorder recorder = null;
 	final String path;
 
 	private MainActivity mainActivity;
@@ -65,7 +65,7 @@ public class AudioRecorder {
 		
 		//if file exists delete it
 		GeneralUtils.deleteFile(path);
-
+		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
@@ -91,6 +91,7 @@ public class AudioRecorder {
 		if (recorder != null){
 			recorder.stop();
 			recorder.release();
+			recorder = null;
 		}
 		GuiUtils.stopDuraionProgressBarTimer();
 		closeTimer();

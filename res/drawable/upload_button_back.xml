@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:state_pressed="true" 
+				android:drawable="@drawable/upload_black" /> <!-- pressed -->  
+	<item android:state_selected="true" 
+				android:drawable="@drawable/upload_black" />  <!-- selected --> 
+	<item android:state_enabled="false" 
+				android:drawable="@drawable/upload_black" />  <!-- enabled -->
+	<item android:drawable="@drawable/upload_blue" /> <!-- default -->
+</selector>

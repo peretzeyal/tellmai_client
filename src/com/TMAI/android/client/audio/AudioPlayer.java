@@ -53,6 +53,7 @@ public class AudioPlayer {
 	public void stopAudio(){
 		if(mediaPlayer != null){
 			mediaPlayer.stop();
+			mediaPlayer.release();
 			mediaPlayer = null;
 		}
 	}

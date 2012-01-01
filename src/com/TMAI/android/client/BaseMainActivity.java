@@ -168,6 +168,7 @@ public class BaseMainActivity extends BaseAppActivity{
 
 		String memoinfoFileName = "";
 		String audioFileName = "";
+		String memoInfoMsg = "";
 
 		@Override
 		protected void onPostExecute(Boolean result) {
@@ -177,7 +178,7 @@ public class BaseMainActivity extends BaseAppActivity{
 				GeneralUtils.deleteFile(oldAudioFolder+memoinfoFileName);
 				GeneralUtils.deleteFile(oldAudioFolder+audioFileName);
 				//DialogUtils.createToast(BaseMainActivity.this, getString(R.string.toast_file_was_uploaded_successfully));
-				NotificationUtils.addUploadSuccessfullyNotification(BaseMainActivity.this);
+				NotificationUtils.addUploadSuccessfullyNotification(BaseMainActivity.this,memoInfoMsg);
 			}
 			else{
 				//problem updating the file and info
@@ -207,6 +208,7 @@ public class BaseMainActivity extends BaseAppActivity{
 			memoinfoFileName = str[0] + MemoInfo.FILE_SUFFIX;
 			audioFileName = str[0] + ADUIO_FILE_SUFFIX;
 			MemoInfo memoInfo = GeneralUtils.readMemoInfo(oldAudioFolder+memoinfoFileName);
+			memoInfoMsg = NotificationUtils.getProjectInfo(BaseMainActivity.this, memoInfo);
 			UploadFileConnection uploadFileConnection = new UploadFileConnection();
 			String fileURL = uploadFileConnection.uploadAudioFile(BaseMainActivity.this, oldAudioFolder, audioFileName);
 			//uploadFileConnection.uploadObject(BaseMainActivity.this, audioFolder, ADUIO_FILE_NAME);

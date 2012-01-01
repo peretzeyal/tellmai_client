@@ -273,7 +273,11 @@ public class MainActivity extends BaseMainActivity{
 		stopButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				GuiUtils.stopDuraionProgressBarTimer();
+				Log.d(TAG, "stop aduio "+audioPlayer);
+
 				audioPlayer.stopAudio();
+				Log.d(TAG, "stop audioRecorder "+audioRecorder);
+
 				if (audioRecorder!=null){
 					try {
 						audioRecorder.stop();

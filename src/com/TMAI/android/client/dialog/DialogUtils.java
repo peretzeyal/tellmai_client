@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.MailTo;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class DialogUtils {
 
 	private static Dialog dialog;
 	private static Timer timeOut;
+	private static int dialogCounter;
 
 
 	public static void createToast(Context context, String msg){
@@ -125,42 +127,49 @@ public class DialogUtils {
 
 
 	public static void createAnotherMemoDialog(final Activity activity){
-		AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-		BaseAppActivity.appInForeground = false;
+		try {
+			AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+			BaseAppActivity.appInForeground = false;
 
-		alert.setTitle(activity.getString(R.string.input_another_memo_title_text));
-		alert.setMessage(activity.getString(R.string.input_another_memo_msg_text)); 
+			int timeoutPeriod = 5;
+			alert.setTitle(activity.getString(R.string.input_another_memo_title_text));
+			String msg = activity.getString(R.string.input_another_memo_msg_text);
+			msg = msg.replace("***", String.valueOf(timeoutPeriod));
+			alert.setMessage(msg); 
 
-		alert.setPositiveButton(activity.getString(R.string.input_another_memo_yes_button), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-				// return value
-				dialog.cancel();
-				if(timeOut!=null){
-					timeOut.cancel();
+			alert.setPositiveButton(activity.getString(R.string.input_another_memo_yes_button), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					// return value
+					dialog.cancel();
+					if(timeOut!=null){
+						timeOut.cancel();
+					}
+					BaseAppActivity.appInForeground = true;
+					activity.finish();
+					activity.startActivity(new Intent(activity,MainActivity.class));
 				}
-				BaseAppActivity.appInForeground = true;
-				activity.finish();
-				activity.startActivity(new Intent(activity,MainActivity.class));
-			}
-		});
+			});
 
-		alert.setNegativeButton(activity.getString(R.string.input_another_memo_no_button), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-				// Canceled.
-				//go to background
-				if(timeOut!=null){
-					timeOut.cancel();
+			/*		alert.setNegativeButton(activity.getString(R.string.input_another_memo_no_button), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					// Canceled.
+					//go to background
+					if(timeOut!=null){
+						timeOut.cancel();
+					}
+					BaseAppActivity.appInForeground = false;
+					activity.moveTaskToBack(true);
 				}
-				BaseAppActivity.appInForeground = false;
-				activity.moveTaskToBack(true);
-			}
-		});
+			});*/
 
-		Dialog dialog = alert.create();
-		dialog.show();
-		dialogTimeOutThread(activity, dialog, 5);
+			Dialog dialog = alert.create();
+			dialog.show();
+			dialogTimeOutThread(activity, dialog, timeoutPeriod);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	/**
 	 * @param dialog - the dialog closed after the timeout
 	 * @param periodSec - the period of time to wait before closing the dialog (-1 will disable the timer)
@@ -169,17 +178,41 @@ public class DialogUtils {
 		if(periodSec == -1){
 			return;
 		}
+		final Handler handler = new Handler();
+		dialogCounter = periodSec;
 		timeOut = new Timer();
 		timeOut.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (dialog!=null){
-					dialog.cancel();
+				dialogCounter--;
+				if (dialogCounter<=0){
+					if (dialog!=null){
+						dialog.cancel();
+					}
+					if (timeOut!=null){
+						timeOut.cancel();
+						timeOut=null;
+					}
+					BaseAppActivity.appInForeground = false;
+					activity.moveTaskToBack(true);
 				}
-				BaseAppActivity.appInForeground = false;
-				activity.moveTaskToBack(true);
+				else{
+					if (handler!=null){
+						handler.post(new Runnable() {
+							
+							@Override
+							public void run() {
+								String msg = activity.getString(R.string.input_another_memo_msg_text);
+								msg = msg.replace("***", String.valueOf(dialogCounter));
+								((AlertDialog)dialog).setMessage(msg);	
+								//dialog.show();
+							}
+						});
+						
+					}
+				}
 			}
-		}, periodSec*1000);
+		}, 1000,1000);
 	}
 
 }

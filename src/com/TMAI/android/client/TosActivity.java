@@ -1,14 +1,6 @@
 package com.TMAI.android.client;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
