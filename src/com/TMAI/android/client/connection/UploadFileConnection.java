@@ -9,29 +9,29 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+
 public class UploadFileConnection {
 
 	private static final String TAG = "UploadFileConnection";
 	
 	private static String s3URL = "https://s3.amazonaws.com/";
-	private static String projectBucket = "tmai_test/recordings";
-	
-	String ACCESS_KEY_ID = "AKIAIZJ3NZHNB4LTL6DA";
-	String SECRET_KEY = "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";
+	private static String projectBucket = "tmai";//"tmai/recordings";
+	private static String projectBucketFolder = "recordings/";
+
 	
 	public String uploadAudioFile(Context context, String filePath, String fileName){
 		try {
 			File uploadFile = new File(filePath+ fileName);
-			long fileSize = uploadFile.length();
+			//long fileSize = uploadFile.length();
 			
 			byte[] b1 = BuildInfo.getSU();
 			String b1String = new String(b1);
 			byte[] b2 = BuildInfo.getSP();
 			String b2String = new String(b2);
 			AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( b1String, b2String ) );
-			PutObjectRequest por = new PutObjectRequest( projectBucket, uploadFile.getName(), uploadFile);
+			PutObjectRequest por = new PutObjectRequest( projectBucket, projectBucketFolder+uploadFile.getName(), uploadFile);
 			s3Client.putObject( por );
-			String fileURL = s3URL+projectBucket+"/"+fileName;
+			String fileURL = s3URL+projectBucket+"/"+projectBucketFolder+fileName;
 			return fileURL;
 		} catch (Exception e) {
 			e.printStackTrace();

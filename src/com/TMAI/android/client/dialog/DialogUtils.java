@@ -9,9 +9,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.MailTo;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.TMAI.android.client.MainActivity;
 import com.TMAI.android.client.R;
 import com.TMAI.android.client.TosActivity;
 import com.TMAI.android.client.gui.GuiUtils;
+import com.TMAI.android.client.gui.StyledText;
 import com.TMAI.android.client.prefs.Prefs;
 import com.TMAI.android.client.utils.GeneralUtils;
 
@@ -86,7 +89,7 @@ public class DialogUtils {
 		AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
 		alert.setTitle(context.getString(R.string.input_change_email_title_text));
-		alert.setMessage(context.getString(R.string.input_change_email_message_text));
+		alert.setMessage(null);
 
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(context);
@@ -135,8 +138,16 @@ public class DialogUtils {
 			alert.setTitle(activity.getString(R.string.input_another_memo_title_text));
 			String msg = activity.getString(R.string.input_another_memo_msg_text);
 			msg = msg.replace("***", String.valueOf(timeoutPeriod));
-			alert.setMessage(msg); 
-
+			//alert.setMessage(msg); 
+			TextView textView = new TextView(activity);
+			textView.setGravity(Gravity.CENTER);
+			//textView.setTextSize(20);
+			StyledText styledText = new StyledText();
+			styledText.addStyledText(msg,25);
+			styledText.addStyledText(String.valueOf(timeoutPeriod), 30,Color.RED);
+			styledText.addStyledText(" sec",25);
+			textView.setText(styledText.getSpanned());
+			alert.setView(textView);
 			alert.setPositiveButton(activity.getString(R.string.input_another_memo_yes_button), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					// return value
@@ -164,7 +175,7 @@ public class DialogUtils {
 
 			Dialog dialog = alert.create();
 			dialog.show();
-			dialogTimeOutThread(activity, dialog, timeoutPeriod);
+			dialogTimeOutThread(activity, dialog, timeoutPeriod,textView);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -174,7 +185,7 @@ public class DialogUtils {
 	 * @param dialog - the dialog closed after the timeout
 	 * @param periodSec - the period of time to wait before closing the dialog (-1 will disable the timer)
 	 */
-	private static void dialogTimeOutThread(final Activity activity,final Dialog dialog,final int periodSec){
+	private static void dialogTimeOutThread(final Activity activity,final Dialog dialog,final int periodSec,final TextView textView){
 		if(periodSec == -1){
 			return;
 		}
@@ -203,8 +214,19 @@ public class DialogUtils {
 							@Override
 							public void run() {
 								String msg = activity.getString(R.string.input_another_memo_msg_text);
-								msg = msg.replace("***", String.valueOf(dialogCounter));
-								((AlertDialog)dialog).setMessage(msg);	
+								StyledText styledText = new StyledText();
+								styledText.addStyledText(msg,25);
+								styledText.addStyledText(String.valueOf(dialogCounter), 30,Color.RED);
+								styledText.addStyledText(" sec",25);
+								//msg = msg.replace("***", styledText.getSpanned());
+								//((AlertDialog)dialog).setMessage(msg);	
+								
+								
+								//textView.setGravity(Gravity.CENTER);
+								textView.setText(styledText.getSpanned());
+								//dialog.setContentView(textView);
+								//dialog.set
+								//((AlertDialog)dialog).setView(textView);
 								//dialog.show();
 							}
 						});

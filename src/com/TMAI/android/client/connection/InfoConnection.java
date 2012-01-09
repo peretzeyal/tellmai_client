@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -25,7 +27,7 @@ public class InfoConnection {
 
 	private final static String SERVER_URL = "http://tmai.cloudshuffle.com/recordings/"; 
 
-	
+
 	public static String getProjectNameByID(String projectID){
 		String projectNeme = null;
 
@@ -57,22 +59,45 @@ public class InfoConnection {
 			nameValuePairs.add(new BasicNameValuePair("upload", ""));
 			nameValuePairs.add(new BasicNameValuePair("tags", memoInfo.getKind()));
 			nameValuePairs.add(new BasicNameValuePair("upload_url", memoInfo.getFileUrl()));
+			Log.d(TAG, "memo url: "+memoInfo.getFileUrl());
 
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 			//execute post
 			HttpResponse response = client.execute(post);
-			HttpEntity  entity   = response.getEntity();
-			//TODO phrase incorrect answer
-			String responseString = EntityUtils.toString(entity);
-			Log.d(TAG, responseString);
-			return true;
+
+			return checkResponseSuccess(response);
 		} catch (ClientProtocolException e) {
 			Log.d(TAG, "problem. stoping the post "+e);
 		} catch (IOException e) {
 			Log.d(TAG, "problem. stoping the post "+e);
 		}
 		return false;
+	}
+
+	private static boolean checkResponseSuccess(HttpResponse response){
+		StatusLine statusLine =	response.getStatusLine();
+		printErrorResponse(response);
+		if (statusLine.getStatusCode() == 200){
+			//the upload was successful
+			Log.d(TAG, "memo upload was successful");
+			return true;
+		}
+		//the upload failed
+		Log.d(TAG, "memo upload failed");
+		return false;
+	}
+
+	private static void printErrorResponse(HttpResponse response){
+		try {
+			HttpEntity  entity   = response.getEntity();
+			String responseString = EntityUtils.toString(entity);
+			Log.d(TAG, responseString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

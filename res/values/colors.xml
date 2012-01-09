@@ -9,6 +9,9 @@
     <color name="gray_modu">#ff8c8c8c</color>
     <color name="white">#ffffff</color>
     <color name="green">#00FF00</color>
+    <color name="red">#FF0000</color>
+    
+    
     <color name="deep_gray">#908e8e</color>
 
 </resources>

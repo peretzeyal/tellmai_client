@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.TMAI.android.client.audio.AudioRecorder;
 import com.TMAI.android.client.connection.InfoConnection;
 import com.TMAI.android.client.connection.UploadFileConnection;
 import com.TMAI.android.client.data.MemoInfo;
-import com.TMAI.android.client.dialog.DialogUtils;
 import com.TMAI.android.client.gui.GuiUtils;
 import com.TMAI.android.client.gui.NotificationUtils;
 import com.TMAI.android.client.gui.GuiUtils.RecordingButtonsState;

@@ -27,6 +27,10 @@ import com.TMAI.android.client.dialog.DialogUtils;
 import com.TMAI.android.client.location.DeviceLocation;
 import com.TMAI.android.client.location.PlacesInRadius;
 
+/**
+ * @author Administrator
+ *
+ */
 public class LocationActivity extends BaseAppActivity{
 
 	public static final int LOCATION_ACTIVITY = 101;
@@ -54,15 +58,22 @@ public class LocationActivity extends BaseAppActivity{
 		});
 		new GooglePlacesConnectionTask().execute();
 	}
-
-
-
-
+	
+	
+	/**
+	 * @param location
+	 * @return the location name can't contain spaces (all spaces will be replaced with underscore)
+	 */
+	private String cleanLocationName(String location){
+		location = location.trim();
+		location = location.replace(" ", "_");
+		return location;
+	}
 
 	private void returnLocationName(String name){
 		//return the value to main activity
 		Intent intent = new Intent();
-		intent.putExtra(LOCATION_NAME, name);
+		intent.putExtra(LOCATION_NAME, cleanLocationName(name));
 		setResult(LOCATION_ACTIVITY, intent);
 		finish();
 	}

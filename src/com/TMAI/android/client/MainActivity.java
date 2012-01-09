@@ -134,7 +134,7 @@ public class MainActivity extends BaseMainActivity{
 			}
 		});
 
-		Button selectProjectButton = (Button) findViewById(R.id.select_project_button);
+		//Button selectProjectButton = (Button) findViewById(R.id.select_project_button);
 		View projectNameLayout = (View)findViewById(R.id.linearLayout_project_name);
 
 		projectNameLayout.setOnClickListener(new OnClickListener() {
@@ -145,9 +145,9 @@ public class MainActivity extends BaseMainActivity{
 				startActivityForResult(intent, LocationActivity.LOCATION_ACTIVITY);
 			}
 		});
-		selectProjectButton.setEnabled(Prefs.isLocationApproved());
+		//selectProjectButton.setEnabled(Prefs.isLocationApproved());
 
-		Button enterProjectButton = (Button) findViewById(R.id.enter_project_id_button);
+		//Button enterProjectButton = (Button) findViewById(R.id.enter_project_id_button);
 		View projectIDLayout = (View)findViewById(R.id.linearLayout_project_id);
 		projectIDLayout.setOnClickListener(new OnClickListener() {
 

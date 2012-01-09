@@ -11,12 +11,12 @@
 
 	<!--notification screen-->
 	<string name="notification_upload_successfully_titel_text">TMAI</string>
-	<string name="notification_upload_successfully_msg_text">feedback to *** delivered</string>
+	<string name="notification_upload_successfully_msg_text">Feedback to *** delivered</string><!--
 	<string name="notification_upload_successfully_project_id">business id</string>
 	<string name="notification_upload_successfully_project_name">business name</string>
 
 
-	<!--login screen-->
+	--><!--login screen-->
 	<string name="login_screen_title_text">Login Screen</string>
 	<string name="login_screen_message_text">Would you like to share your location </string>
 	<string name="login_ok_button">OK</string>
@@ -38,8 +38,8 @@
 	<string name="places_progress_dialog_message">Connecting...</string>
 
 	<!--project id input popup-->
-	<string name="input_titel_text">Business ID</string>
-	<string name="input_message_text">Please enter a business id</string>
+	<string name="input_titel_text">Business Id</string>
+	<string name="input_message_text">Please enter a Business Id</string>
 	<string name="input_ok_button">OK</string>
 	<string name="input_cancel_button">Cancel</string>
 
@@ -53,18 +53,20 @@
 
 	<!--send another memo popup-->
 	<string name="input_another_memo_title_text">Feedback queued for delivery</string>
-	<string name="input_another_memo_msg_text">this app will automatically close in *** sec.\nTo send additional feedback click</string>
+	<!--<string name="input_another_memo_msg_text">This app will automatically close in *** sec.\nTo send additional feedback click</string>
+	-->
+	<string name="input_another_memo_msg_text">Closing the app in\n</string>
 	<string name="input_another_memo_yes_button">Send additional feedback</string>
 	<string name="input_another_memo_no_button">No</string>
 
 
 	<!--main screen-->
-	<string name="main_titel_text">Record and send your feedback</string>
+	<string name="main_titel_text">Record and Upload your feedback</string><!--
 	<string name="main_enter_project">Enter business Id</string>
 	<string name="main_select_project">Select business from list</string>
 
 
-	<string name="main_start_button">Start</string>
+	--><string name="main_start_button">Start</string>
 	<string name="main_stop_button">Stop</string>
 	<string name="main_record_button">Record</string>
 
@@ -73,6 +75,7 @@
 	<string name="main_kind_3_button">General</string>
 	
 	<string name="main_upload_button">Upload</string>
+	
 	<!--
 
 		<string name="main_type_1_button">Type 1</string> <string
@@ -86,7 +89,10 @@
 
 	<!--main screen labels-->
 	<string name="main_label_severity">Severity</string>
-	<string name="main_label_project_id">Business ID:</string>
+	<string name="main_label_disclaimer">Your email is never sent to the Business</string>
+	
+	
+	<string name="main_label_project_id">Business Id:</string>
 	<string name="main_label_project_name">Business Name:</string>
 
 	<!--server connection-->

@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30sp"
                     android:gravity="center"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal" ><!--
 
                     <Button
                         android:id="@+id/enter_project_id_button"
@@ -124,7 +124,7 @@
                         android:text="@string/main_select_project"
                         android:textColor="#ffffff"
                         android:visibility="gone" />
-                </LinearLayout>
+                --></LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout_record"
@@ -142,7 +142,7 @@
                         <ImageButton
                             android:id="@+id/play_button"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="fill_parent"
                             android:background="@drawable/button_back"
                             android:src="@drawable/play_button"
                             android:text="@string/main_start_button"
@@ -166,7 +166,7 @@
                         android:background="@drawable/button_back"
                         android:src="@drawable/record_button"
                         android:text="@string/main_record_button"
-                        android:textColor="#ffffff" android:layout_weight="1"/>
+                        android:textColor="@color/red" android:layout_weight="1" android:textSize="22sp" android:textStyle="bold"/>
                 </LinearLayout>
 
                 <ProgressBar
@@ -204,6 +204,32 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/checkBox1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_kind_1_button" android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/checkBox2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_kind_2_button" android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/checkBox3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_kind_3_button" android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/linearLayout_kind"
                     android:layout_width="fill_parent"
                     android:layout_height="50sp"
@@ -216,7 +242,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/button_back"
                         android:text="@string/main_kind_1_button"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff" android:textSize="20sp"/>
 
                     <Button
                         android:id="@+id/kind_2_button"
@@ -225,7 +251,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/button_back"
                         android:text="@string/main_kind_2_button"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff" android:textSize="20sp"/>
 
                     <Button
                         android:id="@+id/kind_3_button"
@@ -234,7 +260,8 @@
                         android:layout_weight="1"
                         android:background="@drawable/button_back"
                         android:text="@string/main_kind_3_button"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff" android:textSize="20sp"/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -256,7 +283,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/main_change_email_button" android:textSize="18sp"/>
+
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/disclaimer_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="1"
+                    android:text="@string/main_label_disclaimer"
+                    android:textColor="@color/white"
+                    android:visibility="visible" android:textSize="16sp" android:layout_marginTop="5sp"/>
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
