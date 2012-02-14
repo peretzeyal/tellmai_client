@@ -22,6 +22,7 @@ import com.TMAI.android.client.BaseAppActivity;
 import com.TMAI.android.client.MainActivity;
 import com.TMAI.android.client.R;
 import com.TMAI.android.client.TosActivity;
+import com.TMAI.android.client.connection.InfoConnection;
 import com.TMAI.android.client.gui.GuiUtils;
 import com.TMAI.android.client.gui.StyledText;
 import com.TMAI.android.client.prefs.Prefs;
@@ -48,7 +49,7 @@ public class DialogUtils {
 		}
 	}
 
-	public static void createInputDialog(Context context, String title, String message,final TextView view ){
+	public static void createInputDialog(final Context context,final String title,final String message, String text,final TextView entityIDView, final TextView entityNameView){
 		AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
 		alert.setTitle(title);
@@ -56,20 +57,35 @@ public class DialogUtils {
 
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(context);
+		if (text!=null){
+			input.setText(text);
+		}
 		alert.setView(input);
 
 		alert.setPositiveButton(context.getString(R.string.input_ok_button), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				String value = input.getText().toString();
+				String entityID = input.getText().toString();
 				// return value
-				view.setText(value);
+				String entityName = InfoConnection.checkIfEntityExists(entityID);
+				if (entityName!=null){
+					//entity id exists
+					entityIDView.setText(entityID);
+					entityNameView.setText(entityName);
+				}
+				else{
+					//entity dosn't exists
+					createToast(context, context.getString(R.string.input_project_id_error));
+					//recall the dialog with the current invalid email
+					createInputDialog(context, title, message, entityID, entityIDView, entityNameView);
+				}
+
 			}
 		});
 
 		alert.setNegativeButton(context.getString(R.string.input_cancel_button), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
-				view.setText("");
+				entityIDView.setText("");
 			}
 		});
 

@@ -1,6 +1,10 @@
 package com.TMAI.android.client.connection;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +16,13 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.util.Log;
 
@@ -25,13 +32,62 @@ import com.TMAI.android.client.data.MemoInfo;
 public class InfoConnection {
 	private static final String TAG = "InfoConnection";
 
-	private final static String SERVER_URL = "http://tmai.cloudshuffle.com/recordings/"; 
+	private final static String SERVER_FEEDBACK_POST_URL = "http://tmai.cloudshuffle.com/api/feedback/";
+	//"http://tmai.cloudshuffle.com/recordings/"; 
+	private final static String SERVER_ENTITY_CHECK_GET_URL = "http://tmai.cloudshuffle.com/api/entity/";
+
+
+	private final static String JSON_HEADER = "application/json";
+	private final static String ENTITY_NAME_HEADER  = "name";
 
 
 	public static String getProjectNameByID(String projectID){
 		String projectNeme = null;
 
 		return projectNeme;
+
+	}
+
+	/**
+	 * @param EntityID - the EntityID we want to check
+	 * @return entity name  or null if the id doesn't exist
+	 */
+	public static String checkIfEntityExists(String EntityID){
+
+		try {
+
+			HttpClient client = new DefaultHttpClient();
+			HttpGet get = new HttpGet(SERVER_ENTITY_CHECK_GET_URL+EntityID);
+
+			//execute get
+			HttpResponse response = client.execute(get);
+			String entityName = null;
+			if (checkResponseSuccess(response)){
+				entityName = getEntityName(response);
+			}
+			return entityName;
+		} catch (ClientProtocolException e) {
+			Log.d(TAG, "problem. stoping the post "+e);
+		} catch (IOException e) {
+			Log.d(TAG, "problem. stoping the post "+e);
+		}
+		return null;
+	}
+
+
+	private static String getEntityName(HttpResponse response){
+		HttpEntity entity = response.getEntity();
+		String entityName = "";
+		if (entity.getContentType().getValue().equals(JSON_HEADER) ){
+			try {
+				String responseString = EntityUtils.toString(entity);
+				JSONObject json=new JSONObject(responseString);
+				entityName = (String) json.get(ENTITY_NAME_HEADER);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return entityName;
 
 	}
 
@@ -45,13 +101,18 @@ public class InfoConnection {
 		try {
 
 			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost(SERVER_URL);
+			HttpPost post = new HttpPost(SERVER_FEEDBACK_POST_URL);
 
 			//fill in the params
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(10);
 			nameValuePairs.add(new BasicNameValuePair("email", memoInfo.getEmail()));
-			nameValuePairs.add(new BasicNameValuePair("name", memoInfo.getProjectName()));
-			nameValuePairs.add(new BasicNameValuePair("project_id", memoInfo.getProjectID()));
+			//we only send either ProjectID or ProjectName not both (ProjectID is preferd)
+			if (memoInfo.getProjectID()!=null && !memoInfo.getProjectID().equals("")){
+				nameValuePairs.add(new BasicNameValuePair("name", memoInfo.getProjectName()));
+			}
+			else{
+				nameValuePairs.add(new BasicNameValuePair("project_id", memoInfo.getProjectID()));
+			}
 			nameValuePairs.add(new BasicNameValuePair("severity", String.valueOf(memoInfo.getSeverity())));
 			nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(memoInfo.getLatitude())));
 			nameValuePairs.add(new BasicNameValuePair("longitude", String.valueOf(memoInfo.getLongitude())));
@@ -77,14 +138,12 @@ public class InfoConnection {
 
 	private static boolean checkResponseSuccess(HttpResponse response){
 		StatusLine statusLine =	response.getStatusLine();
-		printErrorResponse(response);
+		//printErrorResponse(response);
 		if (statusLine.getStatusCode() == 200){
 			//the upload was successful
-			Log.d(TAG, "memo upload was successful");
 			return true;
 		}
-		//the upload failed
-		Log.d(TAG, "memo upload failed");
+		//the Response failed
 		return false;
 	}
 
@@ -99,5 +158,39 @@ public class InfoConnection {
 			e.printStackTrace();
 		}
 	}
+
+/*
+	private static String convertStreamToString(InputStream is) {
+		
+		 * To convert the InputStream to String we use the BufferedReader.readLine()
+		 * method. We iterate until the BufferedReader return null which means
+		 * there's no more data to read. Each line will appended to a StringBuilder
+		 * and returned as String.
+		 
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		StringBuilder sb = new StringBuilder();
+
+		String line;
+		try {
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb.toString();
+	}*/
 
 }

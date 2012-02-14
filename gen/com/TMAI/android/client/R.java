@@ -23,7 +23,7 @@ public final class R {
     public static final class drawable {
         public static final int background=0x7f020000;
         public static final int background_row=0x7f020001;
-        public static final int black=0x7f020018;
+        public static final int black=0x7f020019;
         public static final int button_back=0x7f020002;
         public static final int button_play=0x7f020003;
         public static final int button_play_disabled=0x7f020004;
@@ -35,7 +35,7 @@ public final class R {
         public static final int button_stop=0x7f02000a;
         public static final int button_stop_disabled=0x7f02000b;
         public static final int button_up=0x7f02000c;
-        public static final int cyan=0x7f020017;
+        public static final int cyan=0x7f020018;
         public static final int icon=0x7f02000d;
         public static final int play_button=0x7f02000e;
         public static final int rating_bar=0x7f02000f;
@@ -43,9 +43,10 @@ public final class R {
         public static final int stop_button=0x7f020011;
         public static final int target_gray=0x7f020012;
         public static final int target_red=0x7f020013;
-        public static final int upload_black=0x7f020014;
-        public static final int upload_blue=0x7f020015;
-        public static final int upload_button_back=0x7f020016;
+        public static final int topbar=0x7f020014;
+        public static final int upload_black=0x7f020015;
+        public static final int upload_blue=0x7f020016;
+        public static final int upload_button_back=0x7f020017;
     }
     public static final class id {
         public static final int LinearLayout_email_message=0x7f060034;
@@ -115,28 +116,29 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050000;
-        public static final int info_server_port=0x7f050037;
-        public static final int info_server_url=0x7f050036;
+        public static final int info_server_port=0x7f050038;
+        public static final int info_server_url=0x7f050037;
         /** <string name="input_another_memo_msg_text">This app will automatically close in *** sec.\nTo send additional feedback click</string>
 	
          */
-        public static final int input_another_memo_msg_text=0x7f050021;
-        public static final int input_another_memo_no_button=0x7f050023;
+        public static final int input_another_memo_msg_text=0x7f050022;
+        public static final int input_another_memo_no_button=0x7f050024;
         /** send another memo popup
          */
-        public static final int input_another_memo_title_text=0x7f050020;
-        public static final int input_another_memo_yes_button=0x7f050022;
+        public static final int input_another_memo_title_text=0x7f050021;
+        public static final int input_another_memo_yes_button=0x7f050023;
         public static final int input_cancel_button=0x7f050019;
-        public static final int input_change_email_cancel_button=0x7f05001d;
-        public static final int input_change_email_changed=0x7f05001e;
-        public static final int input_change_email_error=0x7f05001f;
-        public static final int input_change_email_message_text=0x7f05001b;
-        public static final int input_change_email_ok_button=0x7f05001c;
+        public static final int input_change_email_cancel_button=0x7f05001e;
+        public static final int input_change_email_changed=0x7f05001f;
+        public static final int input_change_email_error=0x7f050020;
+        public static final int input_change_email_message_text=0x7f05001c;
+        public static final int input_change_email_ok_button=0x7f05001d;
         /** change email popup
          */
-        public static final int input_change_email_title_text=0x7f05001a;
+        public static final int input_change_email_title_text=0x7f05001b;
         public static final int input_message_text=0x7f050017;
         public static final int input_ok_button=0x7f050018;
+        public static final int input_project_id_error=0x7f05001a;
         /** project id input popup
          */
         public static final int input_titel_text=0x7f050016;
@@ -159,20 +161,20 @@ login screen
 		name="main_type_3_button">Type 3</string>
 	
          */
-        public static final int main_allow_reply_text=0x7f05002c;
-        public static final int main_change_email_button=0x7f05002d;
-        public static final int main_error_start_audio=0x7f05002f;
-        public static final int main_kind_1_button=0x7f050028;
-        public static final int main_kind_2_button=0x7f050029;
-        public static final int main_kind_3_button=0x7f05002a;
-        public static final int main_label_disclaimer=0x7f050031;
-        public static final int main_label_project_id=0x7f050032;
-        public static final int main_label_project_name=0x7f050033;
+        public static final int main_allow_reply_text=0x7f05002d;
+        public static final int main_change_email_button=0x7f05002e;
+        public static final int main_error_start_audio=0x7f050030;
+        public static final int main_kind_1_button=0x7f050029;
+        public static final int main_kind_2_button=0x7f05002a;
+        public static final int main_kind_3_button=0x7f05002b;
+        public static final int main_label_disclaimer=0x7f050032;
+        public static final int main_label_project_id=0x7f050033;
+        public static final int main_label_project_name=0x7f050034;
         /** main screen labels
          */
-        public static final int main_label_severity=0x7f050030;
-        public static final int main_record_button=0x7f050027;
-        public static final int main_send_button=0x7f05002e;
+        public static final int main_label_severity=0x7f050031;
+        public static final int main_record_button=0x7f050028;
+        public static final int main_send_button=0x7f05002f;
         /** 
 	<string name="main_enter_project">Enter business Id</string>
 	<string name="main_select_project">Select business from list</string>
@@ -180,12 +182,12 @@ login screen
 
 	
          */
-        public static final int main_start_button=0x7f050025;
-        public static final int main_stop_button=0x7f050026;
+        public static final int main_start_button=0x7f050026;
+        public static final int main_stop_button=0x7f050027;
         /** main screen
          */
-        public static final int main_titel_text=0x7f050024;
-        public static final int main_upload_button=0x7f05002b;
+        public static final int main_titel_text=0x7f050025;
+        public static final int main_upload_button=0x7f05002c;
         public static final int notification_upload_successfully_msg_text=0x7f050006;
         /** notification screen
          */
@@ -211,9 +213,9 @@ login screen
         public static final int tos_title_text=0x7f05000b;
         public static final int tos_with_email_button=0x7f05000e;
         public static final int tos_without_email_button=0x7f05000f;
-        public static final int upload_file_server_port=0x7f050035;
+        public static final int upload_file_server_port=0x7f050036;
         /** server connection
          */
-        public static final int upload_file_server_url=0x7f050034;
+        public static final int upload_file_server_url=0x7f050035;
     }
 }

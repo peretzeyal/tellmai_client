@@ -155,7 +155,7 @@ public class MainActivity extends BaseMainActivity{
 				String title = getString(R.string.input_titel_text);
 				String msg = getString(R.string.input_message_text);
 				resetProjectObjects();
-				DialogUtils.createInputDialog(MainActivity.this, title, msg, projectIDTV);
+				DialogUtils.createInputDialog(MainActivity.this, title, msg, "", projectIDTV, projectNameTV);
 			}
 		});
 
