@@ -1,7 +1,5 @@
 package com.TMAI.android.client;
 
-import com.TMAI.android.client.utils.GeneralUtils;
-
 import android.app.Activity;
 import android.os.Bundle;
 

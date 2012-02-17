@@ -11,7 +11,10 @@
 
 	<!--notification screen-->
 	<string name="notification_upload_successfully_titel_text">TMAI</string>
-	<string name="notification_upload_successfully_msg_text">Feedback to *** delivered</string><!--
+	<string name="notification_upload_successfully_msg_text">Feedback to *** delivered</string>
+	<string name="notification_entity_validation_titel_text">TMAI</string>
+	<string name="notification_entity_validation_msg_text">Feedback to *** failed</string>
+	<!--
 	<string name="notification_upload_successfully_project_id">business id</string>
 	<string name="notification_upload_successfully_project_name">business name</string>
 

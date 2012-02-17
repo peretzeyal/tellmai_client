@@ -206,4 +206,20 @@ public class GeneralUtils {
 		}
 		return connected;
 	}
+	
+	public static String getProjectInfo(MemoInfo memoInfo){
+		String msg = "";
+		if (memoInfo.getProjectID().equals("")){
+			//get project name
+			//msg = activity.getString(R.string.notification_upload_successfully_project_name);
+			msg = memoInfo.getProjectName();
+		}
+		else{
+			//get project id
+			//msg = activity.getString(R.string.notification_upload_successfully_project_id);
+			msg = memoInfo.getProjectID();
+		}
+		return msg;
+
+	}
 }

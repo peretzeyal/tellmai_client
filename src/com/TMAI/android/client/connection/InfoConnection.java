@@ -26,7 +26,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.TMAI.android.client.data.EntityValidationResult;
 import com.TMAI.android.client.data.MemoInfo;
+import com.TMAI.android.client.data.EntityValidationResult.EntityValidationResultType;
 
 
 public class InfoConnection {
@@ -40,7 +42,7 @@ public class InfoConnection {
 	private final static String JSON_HEADER = "application/json";
 	private final static String ENTITY_NAME_HEADER  = "name";
 
-
+	
 	public static String getProjectNameByID(String projectID){
 		String projectNeme = null;
 
@@ -49,13 +51,14 @@ public class InfoConnection {
 	}
 
 	/**
+	 * connect to the server and validate that the EntityID exists
 	 * @param EntityID - the EntityID we want to check
-	 * @return entity name  or null if the id doesn't exist
+	 * @return EntityValidationResult object
 	 */
-	public static String checkIfEntityExists(String EntityID){
-
+	public static EntityValidationResult entityValidation(String EntityID){
+		EntityValidationResult entityValidationResult = new EntityValidationResult(
+				EntityValidationResultType.CONNECTION_PROBLEM, EntityID, "");
 		try {
-
 			HttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(SERVER_ENTITY_CHECK_GET_URL+EntityID);
 
@@ -65,19 +68,26 @@ public class InfoConnection {
 			if (checkResponseSuccess(response)){
 				entityName = getEntityName(response);
 			}
-			return entityName;
+			entityValidationResult.setEntityName(entityName);
+			if (entityName!=null){
+				entityValidationResult.setEntityValidationResultType(EntityValidationResultType.ENTITY_EXISTS);
+			}
+			else{
+				entityValidationResult.setEntityValidationResultType(EntityValidationResultType.ENTITY_DOES_NOT_EXISTS);
+			}
 		} catch (ClientProtocolException e) {
 			Log.d(TAG, "problem. stoping the post "+e);
 		} catch (IOException e) {
 			Log.d(TAG, "problem. stoping the post "+e);
+			entityValidationResult.setEntityValidationResultType(EntityValidationResultType.CONNECTION_PROBLEM);
 		}
-		return null;
+		return entityValidationResult;
 	}
 
 
 	private static String getEntityName(HttpResponse response){
 		HttpEntity entity = response.getEntity();
-		String entityName = "";
+		String entityName = null;
 		if (entity.getContentType().getValue().equals(JSON_HEADER) ){
 			try {
 				String responseString = EntityUtils.toString(entity);
@@ -106,12 +116,12 @@ public class InfoConnection {
 			//fill in the params
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(10);
 			nameValuePairs.add(new BasicNameValuePair("email", memoInfo.getEmail()));
-			//we only send either ProjectID or ProjectName not both (ProjectID is preferd)
+			//we only send either ProjectID or ProjectName not both (ProjectID is preferred)
 			if (memoInfo.getProjectID()!=null && !memoInfo.getProjectID().equals("")){
-				nameValuePairs.add(new BasicNameValuePair("name", memoInfo.getProjectName()));
+				nameValuePairs.add(new BasicNameValuePair("entity_id", memoInfo.getProjectID()));
 			}
 			else{
-				nameValuePairs.add(new BasicNameValuePair("project_id", memoInfo.getProjectID()));
+				nameValuePairs.add(new BasicNameValuePair("cid_name", memoInfo.getProjectName()));
 			}
 			nameValuePairs.add(new BasicNameValuePair("severity", String.valueOf(memoInfo.getSeverity())));
 			nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(memoInfo.getLatitude())));
@@ -159,38 +169,5 @@ public class InfoConnection {
 		}
 	}
 
-/*
-	private static String convertStreamToString(InputStream is) {
-		
-		 * To convert the InputStream to String we use the BufferedReader.readLine()
-		 * method. We iterate until the BufferedReader return null which means
-		 * there's no more data to read. Each line will appended to a StringBuilder
-		 * and returned as String.
-		 
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		StringBuilder sb = new StringBuilder();
-
-		String line;
-		try {
-			while ((line = reader.readLine()) != null) {
-				sb.append(line + "\n");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return sb.toString();
-	}*/
 
 }

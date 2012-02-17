@@ -7,6 +7,14 @@ import android.content.Context;
 import com.TMAI.android.client.utils.BuildInfo;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.AccessControlList;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.Grant;
+import com.amazonaws.services.s3.model.Grantee;
+import com.amazonaws.services.s3.model.GroupGrantee;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.Owner;
+import com.amazonaws.services.s3.model.Permission;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 
@@ -28,9 +36,39 @@ public class UploadFileConnection {
 			String b1String = new String(b1);
 			byte[] b2 = BuildInfo.getSP();
 			String b2String = new String(b2);
+			ObjectMetadata objectMetadata = new ObjectMetadata();
+			
 			AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( b1String, b2String ) );
 			PutObjectRequest por = new PutObjectRequest( projectBucket, projectBucketFolder+uploadFile.getName(), uploadFile);
+//			AccessControlList accessControlList = new AccessControlList();
+///*			Grantee grantee = new Grantee() {
+//				
+//				@Override
+//				public void setIdentifier(String s) {
+//					
+//				}
+//				
+//				@Override
+//				public String getIdentifier() {
+//					return null;
+//				}
+//			}; 
+//			grantee.setIdentifier("Everyone");*/
+//			//Grant grant = new Grant( grantee,Permission.FullControl);
+//			//accessControlList.grantAllPermissions(agrant)(grant);
+//			df
+//			accessControlList.setOwner(new Owner("ron","ron"));
+			
+/*			val putObjectRequest = new PutObjectRequest(bucketName, key, inputStream, metadata)
+			val acl = CannedAccessControlList.Private
+			putObjectRequest.setCannedAcl(acl)
+			s3.putObject(putObjectRequest)
+			*/
+			CannedAccessControlList acl = CannedAccessControlList.PublicRead;
+			por.setCannedAcl(acl);
 			s3Client.putObject( por );
+//			s3Client.setObjectAcl(projectBucket, projectBucketFolder+uploadFile.getName());
+			
 			String fileURL = s3URL+projectBucket+"/"+projectBucketFolder+fileName;
 			return fileURL;
 		} catch (Exception e) {

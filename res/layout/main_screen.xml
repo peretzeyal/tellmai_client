@@ -4,329 +4,347 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" android:background="@drawable/black">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="vertical" >
+        android:layout_weight="0" >
 
-        <ScrollView
-            android:id="@+id/scrollView1"
+        <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/linearLayout1"
+                android:id="@+id/linearLayout2"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
                 android:orientation="vertical" >
- 
-                <LinearLayout
-                    android:id="@+id/linearLayout_title"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal" >
 
-                    <TextView
-                        android:id="@+id/title_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_titel_text"
-                        android:textColor="#ffffff" android:textSize="18sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/LinearLayout_project"
+                <ScrollView
+                    android:id="@+id/scrollView1"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
 
                     <LinearLayout
-                        android:id="@+id/linearLayout_project_id"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/background_row"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="10sp" >
-
-                        <TextView
-                            android:id="@+id/project_id_label_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10sp"
-                            android:text="@string/main_label_project_id"
-                            android:textColor="@color/black" android:textSize="18sp"/>
-
-                        <TextView
-                            android:id="@+id/project_id_tv"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20sp"
-                            android:maxLines="2"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout_project_name"
+                        android:id="@+id/linearLayout1"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:background="@drawable/background_row"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal" >
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15sp"
+                            android:layout_marginTop="10sp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/title_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5sp"
+                                android:text="@string/main_titel_text"
+                                android:textColor="#ffffff"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_project"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout_project_id"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/background_row"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="10sp" >
+
+                                <TextView
+                                    android:id="@+id/project_id_label_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10sp"
+                                    android:text="@string/main_label_project_id"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/project_id_tv"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="20sp"
+                                    android:maxLines="2"
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout_project_name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="@drawable/background_row"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:id="@+id/project_name_label_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10sp"
+                                    android:layout_marginRight="10sp"
+                                    android:text="@string/main_label_project_name"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/project_name_tv"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="20sp"
+                                    android:maxLines="2"
+                                    android:textColor="@color/black" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_project_select"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="30sp"
+                            android:gravity="center"
+                            android:orientation="horizontal" >
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout_record"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal" >
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout_audio"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal" >
+
+                                <ImageButton
+                                    android:id="@+id/play_button"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:background="@drawable/button_back"
+                                    android:src="@drawable/play_button"
+                                    android:text="@string/main_start_button"
+                                    android:textColor="#ffffff" />
+
+                                <ImageButton
+                                    android:id="@+id/stop_button"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/button_back"
+                                    android:src="@drawable/stop_button"
+                                    android:text="@string/main_stop_button"
+                                    android:textColor="#ffffff"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                            <ImageButton
+                                android:id="@+id/record_button"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/button_back"
+                                android:src="@drawable/record_button"
+                                android:text="@string/main_record_button"
+                                android:textColor="@color/red"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:id="@+id/duration_progressBar"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3sp"
+                            android:max="45" />
 
                         <TextView
-                            android:id="@+id/project_name_label_tv"
+                            android:id="@+id/severity_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10sp"
                             android:layout_marginRight="10sp"
-                            android:text="@string/main_label_project_name"
-                            android:textColor="@color/black" android:textSize="18sp"/>
+                            android:text="@string/main_label_severity"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout_type"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical" >
+
+                            <RatingBar
+                                android:id="@+id/severity_ratingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:isIndicator="false"
+                                android:max="5"
+                                android:numStars="5"
+                                android:progressDrawable="@drawable/rating_bar"
+                                android:rating="1"
+                                android:stepSize="1.0" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout3"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone" >
+
+                            <CheckBox
+                                android:id="@+id/checkBox1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/main_kind_1_button" />
+
+                            <CheckBox
+                                android:id="@+id/checkBox2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/main_kind_2_button" />
+
+                            <CheckBox
+                                android:id="@+id/checkBox3"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/main_kind_3_button" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout_kind"
+                            android:layout_width="fill_parent"
+                            android:layout_height="50sp"
+                            android:orientation="horizontal" >
+
+                            <Button
+                                android:id="@+id/kind_1_button"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/button_back"
+                                android:text="@string/main_kind_1_button"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp" />
+
+                            <Button
+                                android:id="@+id/kind_2_button"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/button_back"
+                                android:text="@string/main_kind_2_button"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp" />
+
+                            <Button
+                                android:id="@+id/kind_3_button"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/button_back"
+                                android:text="@string/main_kind_3_button"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_reply_email"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="2sp" >
+
+                            <CheckBox
+                                android:id="@+id/allow_reply_cb"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/main_allow_reply_text"
+                                android:textSize="18sp" />
+
+                            <Button
+                                android:id="@+id/change_email_button"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/main_change_email_button"
+                                android:textSize="18sp" />
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/project_name_tv"
-                            android:layout_width="fill_parent"
+                            android:id="@+id/disclaimer_tv"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20sp"
-                            android:maxLines="2"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/LinearLayout_project_select"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30sp"
-                    android:gravity="center"
-                    android:orientation="horizontal" ><!--
-
-                    <Button
-                        android:id="@+id/enter_project_id_button"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_back"
-                        android:text="@string/main_enter_project"
-                        android:textColor="#ffffff"
-                        android:visibility="gone" />
-
-                    <Button
-                        android:id="@+id/select_project_button"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_back"
-                        android:text="@string/main_select_project"
-                        android:textColor="#ffffff"
-                        android:visibility="gone" />
-                --></LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout_record"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout_audio"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="horizontal" android:layout_weight="1">
-
-                        <ImageButton
-                            android:id="@+id/play_button"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:background="@drawable/button_back"
-                            android:src="@drawable/play_button"
-                            android:text="@string/main_start_button"
-                            android:textColor="#ffffff" />
-
-                        <ImageButton
-                            android:id="@+id/stop_button"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10sp"
+                            android:layout_marginRight="10sp"
+                            android:layout_marginTop="5sp"
                             android:layout_weight="1"
-                            android:background="@drawable/button_back"
-                            android:src="@drawable/stop_button"
-                            android:text="@string/main_stop_button"
-                            android:textColor="#ffffff" android:visibility="gone"/>
+                            android:text="@string/main_label_disclaimer"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:visibility="visible" />
                     </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
 
-                    <ImageButton
-                        android:id="@+id/record_button"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/button_back"
-                        android:src="@drawable/record_button"
-                        android:text="@string/main_record_button"
-                        android:textColor="@color/red" android:layout_weight="1" android:textSize="22sp" android:textStyle="bold"/>
-                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout_save"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0"
+                android:gravity="bottom"
+                android:orientation="horizontal" >
 
-                <ProgressBar
-                    android:id="@+id/duration_progressBar"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" android:layout_marginBottom="3sp" android:max="45"/>
-
-                <TextView
-                    android:id="@+id/severity_tv"
+                <LinearLayout
+                    android:id="@+id/linearLayout_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp"
-                    android:text="@string/main_label_severity"
-                    android:textColor="@color/white"
-                    android:visibility="visible" android:textSize="18sp"/>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout_type"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="bottom|center_horizontal"
                     android:orientation="vertical" >
 
-                    <RatingBar
-                        android:id="@+id/severity_ratingBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:isIndicator="false"
-                        android:numStars="5"
-                        android:rating="1"
-                        android:stepSize="1.0" android:progressDrawable="@drawable/rating_bar" android:max="5"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:visibility="gone">
-
-                    <CheckBox
-                        android:id="@+id/checkBox1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_kind_1_button" android:layout_weight="1"/>
-
-                    <CheckBox
-                        android:id="@+id/checkBox2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_kind_2_button" android:layout_weight="1"/>
-
-                    <CheckBox
-                        android:id="@+id/checkBox3"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_kind_3_button" android:layout_weight="1"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout_kind"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50sp"
-                    android:orientation="horizontal">
-
                     <Button
-                        android:id="@+id/kind_1_button"
+                        android:id="@+id/send_button"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:background="@drawable/button_back"
-                        android:text="@string/main_kind_1_button"
-                        android:textColor="#ffffff" android:textSize="20sp"/>
-
-                    <Button
-                        android:id="@+id/kind_2_button"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_back"
-                        android:text="@string/main_kind_2_button"
-                        android:textColor="#ffffff" android:textSize="20sp"/>
-
-                    <Button
-                        android:id="@+id/kind_3_button"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_back"
-                        android:text="@string/main_kind_3_button"
-                        android:textColor="#ffffff" android:textSize="20sp"/>
-
+                        android:text="@string/main_upload_button"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/LinearLayout_reply_email"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="2sp" >
-
-                    <CheckBox
-                        android:id="@+id/allow_reply_cb"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/main_allow_reply_text" android:textSize="18sp"/>
-
-                    <Button
-                        android:id="@+id/change_email_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_change_email_button" android:textSize="18sp"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/disclaimer_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp"
-                    android:layout_weight="1"
-                    android:text="@string/main_label_disclaimer"
-                    android:textColor="@color/white"
-                    android:visibility="visible" android:textSize="16sp" android:layout_marginTop="5sp"/>
-
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout_save"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="0"
-        android:gravity="bottom"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:id="@+id/linearLayout_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" android:gravity="bottom|center_horizontal">
-
-            <Button
-                android:id="@+id/send_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/upload_button_back"
-                android:text="@string/main_upload_button"
-                android:textColor="#000000"
-                android:textSize="22sp" />
-
         </LinearLayout>
-    </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

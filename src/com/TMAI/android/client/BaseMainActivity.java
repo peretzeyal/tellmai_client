@@ -19,6 +19,7 @@ import com.TMAI.android.client.audio.AudioPlayer;
 import com.TMAI.android.client.audio.AudioRecorder;
 import com.TMAI.android.client.connection.InfoConnection;
 import com.TMAI.android.client.connection.UploadFileConnection;
+import com.TMAI.android.client.data.EntityValidationResult;
 import com.TMAI.android.client.data.MemoInfo;
 import com.TMAI.android.client.gui.GuiUtils;
 import com.TMAI.android.client.gui.NotificationUtils;
@@ -32,8 +33,8 @@ public class BaseMainActivity extends BaseAppActivity{
 	private static final String TAG = "BaseMainActivity";
 
 	//original file name
-	protected static final String ADUIO_FILE_SUFFIX = ".3gp";  
-	protected static final String ADUIO_FILE_NAME = "record.3gp";
+	protected static final String ADUIO_FILE_SUFFIX = ".mp3";//".3gp";  
+	protected static final String ADUIO_FILE_NAME = "record.mp3";//"record.3gp";
 	//protected static final String ADUIO_FOLDER = "";
 	protected static String audioFolder;
 	protected static String oldAudioFolder;
@@ -119,7 +120,8 @@ public class BaseMainActivity extends BaseAppActivity{
 	 */
 	protected void savingAudioAndMemoInfoFiles(){
 		MemoInfo memoInfo = createMemoInfo();
-		String newFileName = GuiUtils.getDateAndTime(BaseMainActivity.this)+"_"+projectID+projectName;
+		String newFileName = GuiUtils.getDateAndTime(BaseMainActivity.this)+"_"+
+			GeneralUtils.getProjectInfo(memoInfo);//projectID+projectName;
 		GeneralUtils.moveFile(audioFolder, ADUIO_FILE_NAME, oldAudioFolder, newFileName+ADUIO_FILE_SUFFIX);
 		GeneralUtils.saveMemoInfo(memoInfo, oldAudioFolder, newFileName+MemoInfo.FILE_SUFFIX);
 		resetProjectObjects();
@@ -157,8 +159,6 @@ public class BaseMainActivity extends BaseAppActivity{
 		return uploadFilesExists;
 	}
 
-
-
 	/**
 	 * execute the file and info upload to the server on AsyncTask
 	 */
@@ -171,14 +171,19 @@ public class BaseMainActivity extends BaseAppActivity{
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
-			if (result){
+			if (result==null){
+				//entity dosn't exists
+				//show a notification to the user
+				NotificationUtils.addEntityValidationNotification(BaseMainActivity.this,memoInfoMsg);
+			}
+			else if (result){
 				//the file and the info updated successfully
 				GeneralUtils.deleteFile(oldAudioFolder+memoinfoFileName);
 				GeneralUtils.deleteFile(oldAudioFolder+audioFileName);
 				//DialogUtils.createToast(BaseMainActivity.this, getString(R.string.toast_file_was_uploaded_successfully));
 				NotificationUtils.addUploadSuccessfullyNotification(BaseMainActivity.this,memoInfoMsg);
 			}
-			else{
+			else {
 				//problem updating the file and info
 				//DialogUtils.createToast(BaseMainActivity.this, getString(R.string.toast_file_was_not_uploaded_successfully));
 			}
@@ -200,13 +205,28 @@ public class BaseMainActivity extends BaseAppActivity{
 		}
 
 		protected Boolean doInBackground(String... str) {
-			//0 file name without extensions
-			//only one of projectID,projectName will not be empty
-			//String newFileName = GuiUtils.getDateAndTime(BaseMainActivity.this)+","+projectID+projectName;
+			//file name without extensions
 			memoinfoFileName = str[0] + MemoInfo.FILE_SUFFIX;
 			audioFileName = str[0] + ADUIO_FILE_SUFFIX;
 			MemoInfo memoInfo = GeneralUtils.readMemoInfo(oldAudioFolder+memoinfoFileName);
-			memoInfoMsg = NotificationUtils.getProjectInfo(BaseMainActivity.this, memoInfo);
+			memoInfoMsg = GeneralUtils.getProjectInfo(memoInfo);
+			
+			if (memoInfo.getProjectID()!=null && !memoInfo.getProjectID().equals("")){
+				//if we are using entity ID and not entity name check it exists
+				EntityValidationResult entityValidationResult = InfoConnection.entityValidation(memoInfo.getProjectID());
+				switch (entityValidationResult.getEntityValidationResultType()) {
+				case ENTITY_EXISTS:
+					//entity id exists
+					break;
+				case ENTITY_DOES_NOT_EXISTS:
+					//entity dosn't exists
+					return null;
+				case CONNECTION_PROBLEM:
+					//problem connecting to the server
+					return null;
+				}
+			}
+			
 			UploadFileConnection uploadFileConnection = new UploadFileConnection();
 			String fileURL = uploadFileConnection.uploadAudioFile(BaseMainActivity.this, oldAudioFolder, audioFileName);
 			//uploadFileConnection.uploadObject(BaseMainActivity.this, audioFolder, ADUIO_FILE_NAME);

@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.MailTo;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,9 +20,8 @@ import android.widget.Toast;
 import com.TMAI.android.client.BaseAppActivity;
 import com.TMAI.android.client.MainActivity;
 import com.TMAI.android.client.R;
-import com.TMAI.android.client.TosActivity;
 import com.TMAI.android.client.connection.InfoConnection;
-import com.TMAI.android.client.gui.GuiUtils;
+import com.TMAI.android.client.data.EntityValidationResult;
 import com.TMAI.android.client.gui.StyledText;
 import com.TMAI.android.client.prefs.Prefs;
 import com.TMAI.android.client.utils.GeneralUtils;
@@ -32,7 +30,7 @@ public class DialogUtils {
 
 	private static final String TAG = "DialogUtils";
 
-	private static Dialog dialog;
+	//private static Dialog dialog;
 	private static Timer timeOut;
 	private static int dialogCounter;
 
@@ -66,19 +64,25 @@ public class DialogUtils {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String entityID = input.getText().toString();
 				// return value
-				String entityName = InfoConnection.checkIfEntityExists(entityID);
-				if (entityName!=null){
+				EntityValidationResult entityValidationResult = InfoConnection.entityValidation(entityID);
+				switch (entityValidationResult.getEntityValidationResultType()) {
+				case ENTITY_EXISTS:
 					//entity id exists
 					entityIDView.setText(entityID);
-					entityNameView.setText(entityName);
-				}
-				else{
+					entityNameView.setText(entityValidationResult.getEntityName());
+					break;
+				case ENTITY_DOES_NOT_EXISTS:
 					//entity dosn't exists
 					createToast(context, context.getString(R.string.input_project_id_error));
 					//recall the dialog with the current invalid email
 					createInputDialog(context, title, message, entityID, entityIDView, entityNameView);
+					break;
+				case CONNECTION_PROBLEM:
+					//problem connecting to the server
+					entityIDView.setText(entityID);
+					entityNameView.setText("");
+					break;
 				}
-
 			}
 		});
 

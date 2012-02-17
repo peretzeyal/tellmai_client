@@ -52,43 +52,15 @@ public class MainActivity extends BaseMainActivity{
 		initGui();
 		guiUpdate();
 		
-		//FileUploader.excutePost("http://tmai.cloudshuffle.com/recordings");
-		//HttpRequest.postData();
-		
-/*		FileUploader vidUploader = new FileUploader("http://tmai.cloudshuffle.com/recordings", audioFolder+ADUIO_FILE_NAME);
-		vidUploader.run();*/
-		//HttpRequest.uploadUserPhoto();
-		
-/*	String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
-		String fileName = "sunset.jpg";*/
-		/*			UploadFileConnection uploadFileConnection = new UploadFileConnection();
-		uploadFileConnection.uploadObject(this, audioFolder, fileName);*/
-	    //AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( Constants.ACCESS_KEY_ID, Constants.SECRET_KEY ) );
-/*		 AWSCredentials myCredentials = new BasicAWSCredentials( "AKIAIZJ3NZHNB4LTL6DA","I3okz8F9rZ7wedthNQQzToPzWQAu7dr12nhMXbP7" );
-		 TransferManager tx = new TransferManager(myCredentials);*/
-
-         	//s3Client.createBucket( "tmai_test");
-        	
-        	//new java.io.File( filePath) );  // Content type is determined by file extension.
-        		
-			
-/*		 Upload myUpload = tx.upload("tmai_test.s3.amazonaws.com", uploadFile.getName(), uploadFile);
-
-
-		 while (myUpload.isDone() == false) {
-		     System.out.println("Transfer: " + myUpload.getDescription());
-		     System.out.println("  - State: " + myUpload.getState());
-		     System.out.println("  - Progress: " + myUpload.getProgress().getBytesTransfered());
-		     // Do work while we wait for our upload to complete...
-		     try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		 }*/
 		//if the last time the connection was down
 		sendUnUploadedFiles(true);
+		MemoInfo memoInfo = new MemoInfo();
+		memoInfo.setProjectID("1");
+		memoInfo.setProjectName("na");
+		memoInfo.setCanReply(true);
+		memoInfo.setKind("service");
+		memoInfo.setSeverity(3);
+		loadGuiFromMemo(memoInfo);
 	}
 
 	@Override
@@ -105,6 +77,26 @@ public class MainActivity extends BaseMainActivity{
 		initOptionGUIButtons();
 		initRecordGui();
 
+	}
+	
+	private void loadGuiFromMemo(MemoInfo memoInfo){
+		projectNameTV.setText(memoInfo.getProjectName());
+		projectIDTV.setText(memoInfo.getProjectID());
+
+		allowReply.setChecked(memoInfo.getCanReply());
+		
+		if (memoInfo.getKind().toLowerCase().contains(kind1Button.getText().toString().toLowerCase())){
+			kind1Button.setSelected(true);
+		}
+		if (memoInfo.getKind().toLowerCase().contains(kind2Button.getText().toString().toLowerCase())){
+			kind2Button.setSelected(true);
+		}
+		if (memoInfo.getKind().toLowerCase().contains(kind3Button.getText().toString().toLowerCase())){
+			kind3Button.setSelected(true);
+		}
+
+		severityRatingBar.setRating(memoInfo.getSeverity());
+		guiUpdate();
 	}
 	
 	/**
