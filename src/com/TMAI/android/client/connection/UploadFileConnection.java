@@ -40,34 +40,11 @@ public class UploadFileConnection {
 			
 			AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( b1String, b2String ) );
 			PutObjectRequest por = new PutObjectRequest( projectBucket, projectBucketFolder+uploadFile.getName(), uploadFile);
-//			AccessControlList accessControlList = new AccessControlList();
-///*			Grantee grantee = new Grantee() {
-//				
-//				@Override
-//				public void setIdentifier(String s) {
-//					
-//				}
-//				
-//				@Override
-//				public String getIdentifier() {
-//					return null;
-//				}
-//			}; 
-//			grantee.setIdentifier("Everyone");*/
-//			//Grant grant = new Grant( grantee,Permission.FullControl);
-//			//accessControlList.grantAllPermissions(agrant)(grant);
-//			df
-//			accessControlList.setOwner(new Owner("ron","ron"));
-			
-/*			val putObjectRequest = new PutObjectRequest(bucketName, key, inputStream, metadata)
-			val acl = CannedAccessControlList.Private
-			putObjectRequest.setCannedAcl(acl)
-			s3.putObject(putObjectRequest)
-			*/
-			CannedAccessControlList acl = CannedAccessControlList.PublicRead;
-			por.setCannedAcl(acl);
+
+			//enable to set the recording public
+/*			CannedAccessControlList acl = CannedAccessControlList.PublicRead;
+			por.setCannedAcl(acl);*/
 			s3Client.putObject( por );
-//			s3Client.setObjectAcl(projectBucket, projectBucketFolder+uploadFile.getName());
 			
 			String fileURL = s3URL+projectBucket+"/"+projectBucketFolder+fileName;
 			return fileURL;

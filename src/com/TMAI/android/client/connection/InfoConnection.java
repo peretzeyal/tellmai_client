@@ -38,9 +38,10 @@ public class InfoConnection {
 	//"http://tmai.cloudshuffle.com/recordings/"; 
 	private final static String SERVER_ENTITY_CHECK_GET_URL = "http://tmai.cloudshuffle.com/api/entity/";
 
-
+	
 	private final static String JSON_HEADER = "application/json";
 	private final static String ENTITY_NAME_HEADER  = "name";
+	private final static String OS_IDENTIFIER  = "Android";
 
 	
 	public static String getProjectNameByID(String projectID){
@@ -129,14 +130,42 @@ public class InfoConnection {
 			nameValuePairs.add(new BasicNameValuePair("can_reply", memoInfo.getCanReplyString()));
 			nameValuePairs.add(new BasicNameValuePair("upload", ""));
 			nameValuePairs.add(new BasicNameValuePair("tags", memoInfo.getKind()));
-			nameValuePairs.add(new BasicNameValuePair("upload_url", memoInfo.getFileUrl()));
+			nameValuePairs.add(new BasicNameValuePair("url", memoInfo.getFileUrl()));
+			nameValuePairs.add(new BasicNameValuePair("mobile_version", OS_IDENTIFIER));
+
+			
+			
+			
+/*			
+			//fill in the params
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(10);
+			nameValuePairs.add(new BasicNameValuePair("email", memoInfo.getEmail()));
+			//we only send either ProjectID or ProjectName not both (ProjectID is preferred)
+			if (memoInfo.getProjectID()!=null && !memoInfo.getProjectID().equals("")){
+				nameValuePairs.add(new BasicNameValuePair("entity_id", memoInfo.getProjectID()));
+			}
+			else{
+				nameValuePairs.add(new BasicNameValuePair("cid_name", memoInfo.getProjectName()));
+			}
+			nameValuePairs.add(new BasicNameValuePair("severity", String.valueOf(memoInfo.getSeverity())));
+			nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(memoInfo.getLatitude())));
+			nameValuePairs.add(new BasicNameValuePair("longitude", String.valueOf(memoInfo.getLongitude())));
+			nameValuePairs.add(new BasicNameValuePair("can_reply", memoInfo.getCanReplyString()));
+			nameValuePairs.add(new BasicNameValuePair("recording", ""));
+			nameValuePairs.add(new BasicNameValuePair("tags", memoInfo.getKind()));
+			nameValuePairs.add(new BasicNameValuePair("url", memoInfo.getFileUrl()));
+//			nameValuePairs.add(new BasicNameValuePair("mobile_version", OS_IDENTIFIER));
+//			nameValuePairs.add(new BasicNameValuePair("duration", OS_IDENTIFIER));
+//			nameValuePairs.add(new BasicNameValuePair("bitrate", OS_IDENTIFIER));
+			*/
+			
 			Log.d(TAG, "memo url: "+memoInfo.getFileUrl());
 
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 			//execute post
 			HttpResponse response = client.execute(post);
-
+			//printErrorResponse(response);
 			return checkResponseSuccess(response);
 		} catch (ClientProtocolException e) {
 			Log.d(TAG, "problem. stoping the post "+e);
@@ -162,9 +191,7 @@ public class InfoConnection {
 			HttpEntity  entity   = response.getEntity();
 			String responseString = EntityUtils.toString(entity);
 			Log.d(TAG, responseString);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

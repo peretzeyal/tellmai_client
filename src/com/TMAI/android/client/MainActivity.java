@@ -42,7 +42,6 @@ public class MainActivity extends BaseMainActivity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main_screen);
 
-		//TODO set name from project id
 		audioRecorder = new AudioRecorder(MainActivity.this ,audioFolder+ADUIO_FILE_NAME);
 		GuiUtils.handler = new Handler();
 		//get full audio file path
@@ -52,15 +51,18 @@ public class MainActivity extends BaseMainActivity{
 		initGui();
 		guiUpdate();
 		
+/*		resetProjectObjects();
+		resetOptionObjects();*/
+		
 		//if the last time the connection was down
 		sendUnUploadedFiles(true);
-		MemoInfo memoInfo = new MemoInfo();
+/*		MemoInfo memoInfo = new MemoInfo();
 		memoInfo.setProjectID("1");
 		memoInfo.setProjectName("na");
 		memoInfo.setCanReply(true);
 		memoInfo.setKind("service");
 		memoInfo.setSeverity(3);
-		loadGuiFromMemo(memoInfo);
+		loadGuiFromMemo(memoInfo);*/
 	}
 
 	@Override
@@ -142,12 +144,9 @@ public class MainActivity extends BaseMainActivity{
 		//Button enterProjectButton = (Button) findViewById(R.id.enter_project_id_button);
 		View projectIDLayout = (View)findViewById(R.id.linearLayout_project_id);
 		projectIDLayout.setOnClickListener(new OnClickListener() {
-
 			public void onClick(View v) {
-				String title = getString(R.string.input_titel_text);
-				String msg = getString(R.string.input_message_text);
 				resetProjectObjects();
-				DialogUtils.createInputDialog(MainActivity.this, title, msg, "", projectIDTV, projectNameTV);
+				DialogUtils.createInputDialog(MainActivity.this, "");
 			}
 		});
 
@@ -209,6 +208,7 @@ public class MainActivity extends BaseMainActivity{
 				}
 			}
 		});
+		
 		
 /*		type1Button = (Button) findViewById(R.id.type_1_button);
 		type2Button = (Button) findViewById(R.id.type_2_button);

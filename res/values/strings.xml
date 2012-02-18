@@ -46,6 +46,8 @@
 	<string name="input_ok_button">OK</string>
 	<string name="input_cancel_button">Cancel</string>
 	<string name="input_project_id_error">Your Business Id dosn\'t exists please try again</string>
+	<string name="entity_validation_progress_dialog_title">Establishing connection</string>
+	<string name="entity_validation_progress_dialog_message">Connecting...</string>
 
 	<!--change email popup-->
 	<string name="input_change_email_title_text">Change Email</string>

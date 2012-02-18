@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.ProgressDialog;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.TMAI.android.client.connection.InfoConnection;
 import com.TMAI.android.client.connection.UploadFileConnection;
 import com.TMAI.android.client.data.EntityValidationResult;
 import com.TMAI.android.client.data.MemoInfo;
+import com.TMAI.android.client.dialog.DialogUtils;
 import com.TMAI.android.client.gui.GuiUtils;
 import com.TMAI.android.client.gui.NotificationUtils;
 import com.TMAI.android.client.gui.GuiUtils.RecordingButtonsState;
@@ -33,8 +35,8 @@ public class BaseMainActivity extends BaseAppActivity{
 	private static final String TAG = "BaseMainActivity";
 
 	//original file name
-	protected static final String ADUIO_FILE_SUFFIX = ".mp3";//".3gp";  
-	protected static final String ADUIO_FILE_NAME = "record.mp3";//"record.3gp";
+	protected static final String ADUIO_FILE_SUFFIX = ".3gp";  
+	protected static final String ADUIO_FILE_NAME = "record.3gp";
 	//protected static final String ADUIO_FOLDER = "";
 	protected static String audioFolder;
 	protected static String oldAudioFolder;
@@ -90,6 +92,13 @@ public class BaseMainActivity extends BaseAppActivity{
 		projectID="";
 		projectName="";
 		guiUpdate();
+	}
+	
+	protected void resetOptionObjects(){
+		kind1Button.setSelected(false);
+		kind2Button.setSelected(false);
+		kind3Button.setSelected(false);
+		severityRatingBar.setRating(1);
 	}
 
 	
@@ -159,6 +168,8 @@ public class BaseMainActivity extends BaseAppActivity{
 		return uploadFilesExists;
 	}
 
+
+	
 	/**
 	 * execute the file and info upload to the server on AsyncTask
 	 */
@@ -280,6 +291,7 @@ public class BaseMainActivity extends BaseAppActivity{
 
 	protected void closeApp(){
 		Log.d(TAG, "Closing "+getString(R.string.app_name));
+		finish();
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 }

@@ -6,10 +6,12 @@ import java.util.TimerTask;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.TMAI.android.client.BaseAppActivity;
+import com.TMAI.android.client.BaseMainActivity;
 import com.TMAI.android.client.MainActivity;
 import com.TMAI.android.client.R;
 import com.TMAI.android.client.connection.InfoConnection;
@@ -33,6 +36,7 @@ public class DialogUtils {
 	//private static Dialog dialog;
 	private static Timer timeOut;
 	private static int dialogCounter;
+	private static BaseMainActivity baseMainActivity;
 
 
 	public static void createToast(Context context, String msg){
@@ -47,54 +51,106 @@ public class DialogUtils {
 		}
 	}
 
-	public static void createInputDialog(final Context context,final String title,final String message, String text,final TextView entityIDView, final TextView entityNameView){
-		AlertDialog.Builder alert = new AlertDialog.Builder(context);
-
+	public static void createInputDialog(BaseMainActivity baseMainActivityObject, String text){
+		baseMainActivity = baseMainActivityObject;
+		AlertDialog.Builder alert = new AlertDialog.Builder(baseMainActivity);
+		String title = baseMainActivity.getString(R.string.input_titel_text);
+		String message = baseMainActivity.getString(R.string.input_message_text);
+		
 		alert.setTitle(title);
 		alert.setMessage(message);
 
 		// Set an EditText view to get user input 
-		final EditText input = new EditText(context);
+		final EditText input = new EditText(baseMainActivity);
 		if (text!=null){
 			input.setText(text);
 		}
 		alert.setView(input);
 
-		alert.setPositiveButton(context.getString(R.string.input_ok_button), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(baseMainActivity.getString(R.string.input_ok_button), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String entityID = input.getText().toString();
+				new entityValidationTask().execute(entityID);
 				// return value
-				EntityValidationResult entityValidationResult = InfoConnection.entityValidation(entityID);
+/*				EntityValidationResult entityValidationResult = InfoConnection.entityValidation(entityID);
 				switch (entityValidationResult.getEntityValidationResultType()) {
 				case ENTITY_EXISTS:
 					//entity id exists
-					entityIDView.setText(entityID);
-					entityNameView.setText(entityValidationResult.getEntityName());
+					mainActivity.projectIDTV.setText(entityID);
+					mainActivity.projectNameTV.setText(entityValidationResult.getEntityName());
 					break;
 				case ENTITY_DOES_NOT_EXISTS:
 					//entity dosn't exists
 					createToast(context, context.getString(R.string.input_project_id_error));
 					//recall the dialog with the current invalid email
-					createInputDialog(context, title, message, entityID, entityIDView, entityNameView);
+					createInputDialog(context, title, message, entityID, mainActivity);
 					break;
 				case CONNECTION_PROBLEM:
 					//problem connecting to the server
-					entityIDView.setText(entityID);
-					entityNameView.setText("");
+					mainActivity.projectIDTV.setText(entityID);
+					mainActivity.projectNameTV.setText("");
 					break;
-				}
+				}*/
 			}
 		});
 
-		alert.setNegativeButton(context.getString(R.string.input_cancel_button), new DialogInterface.OnClickListener() {
+		alert.setNegativeButton(baseMainActivity.getString(R.string.input_cancel_button), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
-				entityIDView.setText("");
+				baseMainActivity.projectIDTV.setText("");
 			}
 		});
 
 		alert.show();
 	}
+	
+	public static class entityValidationTask extends AsyncTask<String, Void, EntityValidationResult> {
+		private ProgressDialog pd;
+		private String entityID;
+		@Override
+		protected void onPostExecute(EntityValidationResult entityValidationResult) {
+			super.onPostExecute(entityValidationResult);
+			if (pd != null) {
+				pd.cancel();
+			}
+			switch (entityValidationResult.getEntityValidationResultType()) {
+			case ENTITY_EXISTS:
+				//entity id exists
+				baseMainActivity.projectIDTV.setText(entityID);
+				baseMainActivity.projectNameTV.setText(entityValidationResult.getEntityName());
+				break;
+			case ENTITY_DOES_NOT_EXISTS:
+				//entity dosn't exists
+				DialogUtils.createToast(baseMainActivity, baseMainActivity.getString(R.string.input_project_id_error));
+				//recall the dialog with the current invalid email
+				DialogUtils.createInputDialog(baseMainActivity, entityID);
+				break;
+			case CONNECTION_PROBLEM:
+				//problem connecting to the server
+				baseMainActivity.projectIDTV.setText(entityID);
+				baseMainActivity.projectNameTV.setText("");
+				break;
+			}		
+		}
+		
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = new ProgressDialog(baseMainActivity);
+			pd.setMessage(baseMainActivity.getResources().getString(R.string.entity_validation_progress_dialog_title));
+			pd.setTitle(baseMainActivity.getResources().getString(R.string.entity_validation_progress_dialog_message));
+			pd.setCancelable(false);
+			pd.show();
+		}
+
+		@Override
+		protected EntityValidationResult doInBackground(String... params) {
+			entityID = params[0];
+			EntityValidationResult entityValidationResult = InfoConnection.entityValidation(entityID);
+			return entityValidationResult;
+		}
+	}	
 
 	public static void createChangeEmailDialog(final Context context){
 		createChangeEmailDialog(context,"");
