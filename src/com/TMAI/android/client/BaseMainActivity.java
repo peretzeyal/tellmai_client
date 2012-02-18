@@ -34,6 +34,12 @@ public class BaseMainActivity extends BaseAppActivity{
 
 	private static final String TAG = "BaseMainActivity";
 
+	private enum FeedbackUploadState{
+		UPLOADED_SUCCESSFULLY,
+		UPLOAD_FAILED,
+		ENTITY_DOES_NOT_EXISTS
+	}
+	
 	//original file name
 	protected static final String ADUIO_FILE_SUFFIX = ".3gp";  
 	protected static final String ADUIO_FILE_NAME = "record.3gp";
@@ -173,30 +179,34 @@ public class BaseMainActivity extends BaseAppActivity{
 	/**
 	 * execute the file and info upload to the server on AsyncTask
 	 */
-	protected class uploadFileToServerTask extends AsyncTask<String, Void, Boolean>{
+	protected class uploadFileToServerTask extends AsyncTask<String, Void, FeedbackUploadState>{
 
 		String memoinfoFileName = "";
 		String audioFileName = "";
 		String memoInfoMsg = "";
 
 		@Override
-		protected void onPostExecute(Boolean result) {
-			super.onPostExecute(result);
-			if (result==null){
-				//entity dosn't exists
-				//show a notification to the user
-				NotificationUtils.addEntityValidationNotification(BaseMainActivity.this,memoInfoMsg);
-			}
-			else if (result){
+		protected void onPostExecute(FeedbackUploadState feedbackUploadState) {
+			super.onPostExecute(feedbackUploadState);
+			switch (feedbackUploadState) {
+			case UPLOADED_SUCCESSFULLY:
 				//the file and the info updated successfully
 				GeneralUtils.deleteFile(oldAudioFolder+memoinfoFileName);
 				GeneralUtils.deleteFile(oldAudioFolder+audioFileName);
 				//DialogUtils.createToast(BaseMainActivity.this, getString(R.string.toast_file_was_uploaded_successfully));
 				NotificationUtils.addUploadSuccessfullyNotification(BaseMainActivity.this,memoInfoMsg);
-			}
-			else {
+				break;
+			case UPLOAD_FAILED:
 				//problem updating the file and info
 				//DialogUtils.createToast(BaseMainActivity.this, getString(R.string.toast_file_was_not_uploaded_successfully));
+				break;
+			case ENTITY_DOES_NOT_EXISTS:
+				//entity dosn't exists
+				//delete the files
+				//NotificationUtils.addEntityValidationNotification(BaseMainActivity.this,memoInfoMsg);
+				GeneralUtils.deleteFile(oldAudioFolder+memoinfoFileName);
+				GeneralUtils.deleteFile(oldAudioFolder+audioFileName);
+				break;
 			}
 			guiUpdate();
 			//if app in the background
@@ -215,7 +225,7 @@ public class BaseMainActivity extends BaseAppActivity{
 
 		}
 
-		protected Boolean doInBackground(String... str) {
+		protected FeedbackUploadState doInBackground(String... str) {
 			//file name without extensions
 			memoinfoFileName = str[0] + MemoInfo.FILE_SUFFIX;
 			audioFileName = str[0] + ADUIO_FILE_SUFFIX;
@@ -231,10 +241,10 @@ public class BaseMainActivity extends BaseAppActivity{
 					break;
 				case ENTITY_DOES_NOT_EXISTS:
 					//entity dosn't exists
-					return null;
+					return FeedbackUploadState.ENTITY_DOES_NOT_EXISTS;
 				case CONNECTION_PROBLEM:
 					//problem connecting to the server
-					return null;
+					return FeedbackUploadState.UPLOAD_FAILED;
 				}
 			}
 			
@@ -246,10 +256,10 @@ public class BaseMainActivity extends BaseAppActivity{
 				memoInfo.setFileUrl(fileURL);
 				boolean infoUpdated = InfoConnection.uploadMemoInfo(memoInfo);
 				if (infoUpdated){
-					return true;
+					return FeedbackUploadState.UPLOADED_SUCCESSFULLY;
 				}
 			}
-			return false;
+			return FeedbackUploadState.UPLOAD_FAILED;
 		}
 
 	}

@@ -24,7 +24,7 @@ public class UploadFileConnection {
 	
 	private static String s3URL = "https://s3.amazonaws.com/";
 	private static String projectBucket = "tmai";//"tmai/recordings";
-	private static String projectBucketFolder = "recordings/";
+	private static String projectBucketFolder = "android/";//"recordings/";
 
 	
 	public String uploadAudioFile(Context context, String filePath, String fileName){
