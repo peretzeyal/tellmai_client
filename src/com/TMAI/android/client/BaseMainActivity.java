@@ -41,8 +41,8 @@ public class BaseMainActivity extends BaseAppActivity{
 	}
 	
 	//original file name
-	protected static final String ADUIO_FILE_SUFFIX = ".3gp";  
-	protected static final String ADUIO_FILE_NAME = "record.3gp";
+	protected static final String ADUIO_FILE_SUFFIX = ".wav";  
+	protected static final String ADUIO_FILE_NAME = "record.wav";
 	//protected static final String ADUIO_FOLDER = "";
 	protected static String audioFolder;
 	protected static String oldAudioFolder;

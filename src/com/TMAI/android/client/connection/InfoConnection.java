@@ -127,7 +127,10 @@ public class InfoConnection {
 			nameValuePairs.add(new BasicNameValuePair("severity", String.valueOf(memoInfo.getSeverity())));
 			nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(memoInfo.getLatitude())));
 			nameValuePairs.add(new BasicNameValuePair("longitude", String.valueOf(memoInfo.getLongitude())));
-			nameValuePairs.add(new BasicNameValuePair("can_reply", memoInfo.getCanReplyString()));
+			//nameValuePairs.add(new BasicNameValuePair("can_reply", memoInfo.getCanReplyString()));
+			if (memoInfo.getCanReply()){
+				nameValuePairs.add(new BasicNameValuePair("contact_me", "on"));
+			}
 			nameValuePairs.add(new BasicNameValuePair("upload", ""));
 			nameValuePairs.add(new BasicNameValuePair("tags", memoInfo.getKind()));
 			nameValuePairs.add(new BasicNameValuePair("url", memoInfo.getFileUrl()));

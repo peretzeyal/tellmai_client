@@ -18,7 +18,8 @@ public class AudioRecorder {
 	private static final String TAG = "AudioRecorder";
 
 
-	MediaRecorder recorder = null;
+	//MediaRecorder recorder = null;
+	ExtAudioRecorder extAudioRecorder = null;
 	final String path;
 
 	private MainActivity mainActivity;
@@ -63,15 +64,31 @@ public class AudioRecorder {
 			throw new Exception("Path to file could not be created.");
 		}
 		
-		//if file exists delete it
+		
+		
+		// Start recording
+		extAudioRecorder = ExtAudioRecorder.getInstanse(false);	  // Compressed recording (AMR)
+		//extAudioRecorder = ExtAudioRecorder.getInstanse(false); // Uncompressed recording (WAV)
+		GeneralUtils.deleteFile(path);
+		extAudioRecorder.setOutputFile(path);
+		extAudioRecorder.prepare();
+		extAudioRecorder.start();
+
+/*		// Stop recording
+		extAudioRecorder.stop();
+		extAudioRecorder.release();
+		*/
+		
+/*		//if file exists delete it
 		GeneralUtils.deleteFile(path);
 		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
 		recorder.setOutputFile(path);
 		recorder.prepare();
-		recorder.start();
+		recorder.start();*/
 		
 		Log.d(TAG, "startTimer thread");
 		Thread thread = new Thread(new Runnable() {
@@ -88,10 +105,14 @@ public class AudioRecorder {
 	 * Stops a recording that has been previously started.
 	 */
 	public void stop() throws Exception {
-		if (recorder != null){
-			recorder.stop();
+		if (extAudioRecorder != null){
+			// Stop recording
+			extAudioRecorder.stop();
+			extAudioRecorder.release();
+			
+/*			recorder.stop();
 			recorder.release();
-			recorder = null;
+			recorder = null;*/
 		}
 		GuiUtils.stopDuraionProgressBarTimer();
 		closeTimer();
