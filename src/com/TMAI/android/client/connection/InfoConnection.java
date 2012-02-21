@@ -116,7 +116,7 @@ public class InfoConnection {
 
 			//fill in the params
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(10);
-			nameValuePairs.add(new BasicNameValuePair("email", memoInfo.getEmail()));
+			nameValuePairs.add(new BasicNameValuePair("uploader_email", memoInfo.getEmail()));
 			//we only send either ProjectID or ProjectName not both (ProjectID is preferred)
 			if (memoInfo.getProjectID()!=null && !memoInfo.getProjectID().equals("")){
 				nameValuePairs.add(new BasicNameValuePair("entity_id", memoInfo.getProjectID()));
@@ -135,32 +135,10 @@ public class InfoConnection {
 			nameValuePairs.add(new BasicNameValuePair("tags", memoInfo.getKind()));
 			nameValuePairs.add(new BasicNameValuePair("url", memoInfo.getFileUrl()));
 			nameValuePairs.add(new BasicNameValuePair("mobile_version", OS_IDENTIFIER));
+/*			nameValuePairs.add(new BasicNameValuePair("duration", "10"));
+			nameValuePairs.add(new BasicNameValuePair("bitrate", "5"));*/
+			
 
-			
-			
-			
-/*			
-			//fill in the params
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(10);
-			nameValuePairs.add(new BasicNameValuePair("email", memoInfo.getEmail()));
-			//we only send either ProjectID or ProjectName not both (ProjectID is preferred)
-			if (memoInfo.getProjectID()!=null && !memoInfo.getProjectID().equals("")){
-				nameValuePairs.add(new BasicNameValuePair("entity_id", memoInfo.getProjectID()));
-			}
-			else{
-				nameValuePairs.add(new BasicNameValuePair("cid_name", memoInfo.getProjectName()));
-			}
-			nameValuePairs.add(new BasicNameValuePair("severity", String.valueOf(memoInfo.getSeverity())));
-			nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(memoInfo.getLatitude())));
-			nameValuePairs.add(new BasicNameValuePair("longitude", String.valueOf(memoInfo.getLongitude())));
-			nameValuePairs.add(new BasicNameValuePair("can_reply", memoInfo.getCanReplyString()));
-			nameValuePairs.add(new BasicNameValuePair("recording", ""));
-			nameValuePairs.add(new BasicNameValuePair("tags", memoInfo.getKind()));
-			nameValuePairs.add(new BasicNameValuePair("url", memoInfo.getFileUrl()));
-//			nameValuePairs.add(new BasicNameValuePair("mobile_version", OS_IDENTIFIER));
-//			nameValuePairs.add(new BasicNameValuePair("duration", OS_IDENTIFIER));
-//			nameValuePairs.add(new BasicNameValuePair("bitrate", OS_IDENTIFIER));
-			*/
 			
 			Log.d(TAG, "memo url: "+memoInfo.getFileUrl());
 

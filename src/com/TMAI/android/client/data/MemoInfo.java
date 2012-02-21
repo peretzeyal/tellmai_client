@@ -16,6 +16,8 @@ public class MemoInfo implements Serializable{
 	private double longitude;
 	private boolean canReply;
 	private String fileUrl;
+	private String duration;
+	private String bitrate;
 
 	public MemoInfo() {
 		super();
@@ -92,5 +94,17 @@ public class MemoInfo implements Serializable{
 	}
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
+	}
+	public String getDuration() {
+		return duration;
+	}
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+	public String getBitrate() {
+		return bitrate;
+	}
+	public void setBitrate(String bitrate) {
+		this.bitrate = bitrate;
 	}
 }

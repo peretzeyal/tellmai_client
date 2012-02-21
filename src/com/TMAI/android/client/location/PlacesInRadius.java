@@ -34,7 +34,6 @@ public class PlacesInRadius {
 		return jsonArray;
 	}
 
-
 	private String callGoogleWebService(String url){ 
 		String result = null;
 		HttpClient httpclient = new DefaultHttpClient();  

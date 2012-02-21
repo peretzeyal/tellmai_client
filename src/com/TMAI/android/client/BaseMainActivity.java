@@ -83,7 +83,7 @@ public class BaseMainActivity extends BaseAppActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		GeneralUtils.setScreenTimeOut(BaseMainActivity.this);
 		audioFolder = GeneralUtils.getAudioFolder();
 		oldAudioFolder = GeneralUtils.getOldAudioFolder();
 		if (audioFolder==null||oldAudioFolder==null){
@@ -299,7 +299,14 @@ public class BaseMainActivity extends BaseAppActivity{
 		return memoInfo;
 	}
 
+	@Override
+	protected void onDestroy() {
+		GeneralUtils.restoreScreenTimeOut(BaseMainActivity.this);
+		super.onDestroy();
+	}
+	
 	protected void closeApp(){
+		GeneralUtils.restoreScreenTimeOut(BaseMainActivity.this);
 		Log.d(TAG, "Closing "+getString(R.string.app_name));
 		finish();
 		android.os.Process.killProcess(android.os.Process.myPid());

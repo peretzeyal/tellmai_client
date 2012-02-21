@@ -233,7 +233,9 @@ public class DialogUtils {
 					}
 					BaseAppActivity.appInForeground = true;
 					activity.finish();
-					activity.startActivity(new Intent(activity,MainActivity.class));
+					Intent intent = new Intent(activity,MainActivity.class);
+					intent.putExtra(MainActivity.SECOND_FEEDBACK, true);
+					activity.startActivity(intent);
 				}
 			});
 

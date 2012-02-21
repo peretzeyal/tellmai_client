@@ -34,6 +34,8 @@ import com.TMAI.android.client.prefs.Prefs;
 
 public class MainActivity extends BaseMainActivity{
 	private static final String TAG = "MainActivity";
+	
+	public static final String SECOND_FEEDBACK = "second_feedback";
 
 
 	@Override
@@ -54,8 +56,10 @@ public class MainActivity extends BaseMainActivity{
 /*		resetProjectObjects();
 		resetOptionObjects();*/
 		
+		if (getIntent()!=null && !getIntent().getBooleanExtra(SECOND_FEEDBACK, false)){
 		//if the last time the connection was down
-		sendUnUploadedFiles(true);
+			sendUnUploadedFiles(true);
+		}
 /*		MemoInfo memoInfo = new MemoInfo();
 		memoInfo.setProjectID("1");
 		memoInfo.setProjectName("na");
@@ -68,7 +72,7 @@ public class MainActivity extends BaseMainActivity{
 	@Override
 	protected void onResume() {
 		super.onResume();
-		guiUpdate();
+		//guiUpdate();
 	}
 
 	/**

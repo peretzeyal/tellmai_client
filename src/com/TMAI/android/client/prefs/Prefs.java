@@ -12,6 +12,8 @@ public class Prefs {
 	private static final String LOCATION_QUESTION = "location_question";
 	private static final String CONTACT_EMAIL = "contact_email";
 	private static final String AUDIO_FOLDER = "audio_folder";
+	private static final String OLD_SCREEN_TIMEOUT = "old_screen_timeout";
+
 
 	private static SharedPreferences sharedPreferences;
 	private static SharedPreferences.Editor editor;;
@@ -62,5 +64,15 @@ public class Prefs {
 		editor.commit();
 	}
 
+	//screen timeout
+	public static int getOldScreenTimeout() {
+		return sharedPreferences.getInt(OLD_SCREEN_TIMEOUT, 0);
+	}
+
+	public static void setOldScreenTimeout(int value) {
+		editor.putInt(OLD_SCREEN_TIMEOUT, value);
+		editor.commit();
+	}
+	
 	
 }
