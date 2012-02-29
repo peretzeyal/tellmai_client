@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,12 +100,18 @@ public class GeneralUtils {
 	 * @return returns the natives devices email 
 	 */
 	public static String getNativeContactEmail(Context context){
-		AccountManager accountManager = AccountManager.get(context);
-		Account[] accounts =  accountManager.getAccountsByType("com.google");
-		//Account[] accounts = AccountManager.get(context).getAccounts();
-		for (Account account : accounts) {
-			String possibleEmail = account.name;
-			return possibleEmail;
+		try {
+			AccountManager accountManager = AccountManager.get(context);
+			Account[] accounts =  accountManager.getAccountsByType("com.google");
+			//Account[] accounts = AccountManager.get(context).getAccounts();
+			for (Account account : accounts) {
+				String possibleEmail = account.name;
+				return possibleEmail;
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "";
 	}
@@ -240,13 +248,57 @@ public class GeneralUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void restoreScreenTimeOut(Context context){
 		try {
+
 			int defTimeOut =  Prefs.getOldScreenTimeout();
+			if (defTimeOut==-1){
+				//don't change the time out if its bigger the new time out
+				return;
+			}
 			Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, defTimeOut);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static String join(String[] parts, String delim) {
+		StringBuilder result = new StringBuilder();
+
+		for (int i = 0; i < parts.length; i++) {
+			String part = parts[i];
+			result.append(part);
+			if (delim != null && i < parts.length-1) {
+				result.append(delim);
+			}        
+		}
+		return result.toString();
+	}
+
+	public static String[] split(String str, char delimiter,
+			boolean removeEmpty)
+	{
+		// Return empty list if source string is empty.
+		final int len = (str == null) ? 0 : str.length();
+		if (len == 0)
+		{
+			return new String[0];
+		}
+
+		final List<String> result = new ArrayList<String>();
+		String elem = null;
+		int i = 0, j = 0;
+		while (j != -1 && j < len)
+		{
+			j = str.indexOf(delimiter,i);
+			elem = (j != -1) ? str.substring(i, j) : str.substring(i);
+			i = j + 1;
+			if (!removeEmpty || !(elem == null || elem.length() == 0))
+			{
+				result.add(elem);
+			}
+		}
+		return result.toArray(new String[result.size()]);
 	}
 }

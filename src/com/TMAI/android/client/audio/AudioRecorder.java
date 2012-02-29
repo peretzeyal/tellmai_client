@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.TMAI.android.client.MainActivity;
+import com.TMAI.android.client.audio.ExtAudioRecorder.State;
 import com.TMAI.android.client.gui.GuiUtils;
 import com.TMAI.android.client.gui.GuiUtils.RecordingButtonsState;
 import com.TMAI.android.client.utils.GeneralUtils;
@@ -35,7 +36,7 @@ public class AudioRecorder {
 		this.mainActivity = mainActivity;
 	}
 
-/*	private String sanitizePath(String path) {
+	/*	private String sanitizePath(String path) {
 		if (!path.startsWith("/")) {
 			path = "/" + path;
 		}
@@ -63,23 +64,26 @@ public class AudioRecorder {
 		if (!directory.exists() && !directory.mkdirs()) {
 			throw new Exception("Path to file could not be created.");
 		}
-		
-		
-		
+		stop(false);
+		GeneralUtils.deleteFile(path);
+
 		// Start recording
 		extAudioRecorder = ExtAudioRecorder.getInstanse(false);	  // Compressed recording (AMR)
 		//extAudioRecorder = ExtAudioRecorder.getInstanse(false); // Uncompressed recording (WAV)
-		GeneralUtils.deleteFile(path);
-		extAudioRecorder.setOutputFile(path);
-		extAudioRecorder.prepare();
-		extAudioRecorder.start();
 
-/*		// Stop recording
+		//extAudioRecorder.reset();
+		extAudioRecorder.setOutputFile(path);
+		Log.d(TAG, "prepare execute");
+		extAudioRecorder.prepare();
+		Log.d(TAG, "start execute");
+		extAudioRecorder.start();
+		
+		/*		// Stop recording
 		extAudioRecorder.stop();
 		extAudioRecorder.release();
-		*/
-		
-/*		//if file exists delete it
+		 */
+
+		/*		//if file exists delete it
 		GeneralUtils.deleteFile(path);
 		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -89,7 +93,7 @@ public class AudioRecorder {
 		recorder.setOutputFile(path);
 		recorder.prepare();
 		recorder.start();*/
-		
+
 		Log.d(TAG, "startTimer thread");
 		Thread thread = new Thread(new Runnable() {
 
@@ -101,28 +105,45 @@ public class AudioRecorder {
 		thread.run();
 	}
 
+
+	public void stop() throws Exception {
+		stop(true);
+	}
 	/**
 	 * Stops a recording that has been previously started.
 	 */
-	public void stop() throws Exception {
+	public void stop(boolean withGui) throws Exception {
 		if (extAudioRecorder != null){
 			// Stop recording
 			extAudioRecorder.stop();
 			extAudioRecorder.release();
-			
-/*			recorder.stop();
+
+			/*			recorder.stop();
 			recorder.release();
 			recorder = null;*/
 		}
 		GuiUtils.stopDuraionProgressBarTimer();
 		closeTimer();
 		Log.d(TAG, "mainActivity end"+mainActivity);
-		
-		if (mainActivity!=null){
-			GuiUtils.changeButtonState(mainActivity, RecordingButtonsState.STOPPED);
+
+		if(withGui){
+			if (mainActivity!=null){
+				//GuiUtils.changeButtonState(mainActivity, RecordingButtonsState.STOPPED);
+				mainActivity.guiUpdate();
+			}
 		}
 	}
 
+	public boolean isRecording(){
+		boolean result = false;
+		if (extAudioRecorder!=null){
+			if (extAudioRecorder.getState()==State.RECORDING){
+				result = true;
+			}
+		}
+		return result;
+	}
+	
 	public void closeTimer() {
 		if (connectionTimeOut != null) {
 			connectionTimeOut.cancel();

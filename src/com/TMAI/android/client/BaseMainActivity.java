@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.ProgressDialog;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import com.TMAI.android.client.connection.InfoConnection;
 import com.TMAI.android.client.connection.UploadFileConnection;
 import com.TMAI.android.client.data.EntityValidationResult;
 import com.TMAI.android.client.data.MemoInfo;
-import com.TMAI.android.client.dialog.DialogUtils;
 import com.TMAI.android.client.gui.GuiUtils;
 import com.TMAI.android.client.gui.NotificationUtils;
 import com.TMAI.android.client.gui.GuiUtils.RecordingButtonsState;
@@ -39,7 +37,7 @@ public class BaseMainActivity extends BaseAppActivity{
 		UPLOAD_FAILED,
 		ENTITY_DOES_NOT_EXISTS
 	}
-	
+
 	//original file name
 	protected static final String ADUIO_FILE_SUFFIX = ".wav";  
 	protected static final String ADUIO_FILE_NAME = "record.wav";
@@ -99,7 +97,7 @@ public class BaseMainActivity extends BaseAppActivity{
 		projectName="";
 		guiUpdate();
 	}
-	
+
 	protected void resetOptionObjects(){
 		kind1Button.setSelected(false);
 		kind2Button.setSelected(false);
@@ -107,26 +105,50 @@ public class BaseMainActivity extends BaseAppActivity{
 		severityRatingBar.setRating(1);
 	}
 
-	
+
 	/**
 	 * update the current gui according to project/recording state
 	 */
-	protected void guiUpdate(){
+	public synchronized void guiUpdate(){
+		RecordingButtonsState recordingButtonsState;
 		//check project name
 		boolean projectNameEnaled = !projectName.equals("")||!projectID.equals("");
 		if (!projectNameEnaled){
-			GuiUtils.changeButtonState(BaseMainActivity.this, RecordingButtonsState.DISABLED);
-			return;
+			recordingButtonsState = RecordingButtonsState.DISABLED;
+			//GuiUtils.changeButtonState(BaseMainActivity.this, RecordingButtonsState.DISABLED);
+
 		}
-		//check if recording file exists
-		File file = new File(audioFolder+ADUIO_FILE_NAME);
-		boolean audioFileEnabled = file.exists();
-		if (projectNameEnaled && audioFileEnabled){
+		else{
+			//check if recording file exists
+			File file = new File(audioFolder+ADUIO_FILE_NAME);
+			boolean audioFileExists = file.exists();		
+
+			if(audioFileExists){
+				//file exists
+				if(audioRecorder.isRecording()){
+					recordingButtonsState = RecordingButtonsState.RECORDING;
+				}
+				else if (audioPlayer.isPlaying()){
+					recordingButtonsState = RecordingButtonsState.PLAYING;
+				}
+				else {
+					recordingButtonsState = RecordingButtonsState.STOPPED;
+				}			
+			}
+			else{
+				//no audio file
+				recordingButtonsState = RecordingButtonsState.NO_RECORDING;
+			}
+		}
+		GuiUtils.changeButtonState(BaseMainActivity.this, recordingButtonsState);
+
+
+		/*		if (projectNameEnaled && audioFileExists){
 			GuiUtils.changeButtonState(BaseMainActivity.this, RecordingButtonsState.STOPPED);
 		}
 		else if(projectNameEnaled){
 			GuiUtils.changeButtonState(BaseMainActivity.this, RecordingButtonsState.NO_RECORDING);
-		}
+		}*/
 	}
 
 
@@ -136,7 +158,7 @@ public class BaseMainActivity extends BaseAppActivity{
 	protected void savingAudioAndMemoInfoFiles(){
 		MemoInfo memoInfo = createMemoInfo();
 		String newFileName = GuiUtils.getDateAndTime(BaseMainActivity.this)+"_"+
-			GeneralUtils.getProjectInfo(memoInfo);//projectID+projectName;
+		GeneralUtils.getProjectInfo(memoInfo);//projectID+projectName;
 		GeneralUtils.moveFile(audioFolder, ADUIO_FILE_NAME, oldAudioFolder, newFileName+ADUIO_FILE_SUFFIX);
 		GeneralUtils.saveMemoInfo(memoInfo, oldAudioFolder, newFileName+MemoInfo.FILE_SUFFIX);
 		resetProjectObjects();
@@ -175,7 +197,7 @@ public class BaseMainActivity extends BaseAppActivity{
 	}
 
 
-	
+
 	/**
 	 * execute the file and info upload to the server on AsyncTask
 	 */
@@ -231,7 +253,7 @@ public class BaseMainActivity extends BaseAppActivity{
 			audioFileName = str[0] + ADUIO_FILE_SUFFIX;
 			MemoInfo memoInfo = GeneralUtils.readMemoInfo(oldAudioFolder+memoinfoFileName);
 			memoInfoMsg = GeneralUtils.getProjectInfo(memoInfo);
-			
+
 			if (memoInfo.getProjectID()!=null && !memoInfo.getProjectID().equals("")){
 				//if we are using entity ID and not entity name check it exists
 				EntityValidationResult entityValidationResult = InfoConnection.entityValidation(memoInfo.getProjectID());
@@ -247,7 +269,7 @@ public class BaseMainActivity extends BaseAppActivity{
 					return FeedbackUploadState.UPLOAD_FAILED;
 				}
 			}
-			
+
 			UploadFileConnection uploadFileConnection = new UploadFileConnection();
 			String fileURL = uploadFileConnection.uploadAudioFile(BaseMainActivity.this, oldAudioFolder, audioFileName);
 			//uploadFileConnection.uploadObject(BaseMainActivity.this, audioFolder, ADUIO_FILE_NAME);
@@ -294,6 +316,10 @@ public class BaseMainActivity extends BaseAppActivity{
 
 		memoInfo.setCanReply(allowReply.isChecked());
 
+		int audioTime = audioPlayer.getFileDuration(audioFolder+ADUIO_FILE_NAME);
+		memoInfo.setDuration(String.valueOf(audioTime));
+		//TODO get the bitrate from the aduio file
+		memoInfo.setBitrate("16");
 		//we can't set the file url until the file is uploaded to the server
 		memoInfo.setFileUrl("");
 		return memoInfo;
@@ -304,7 +330,7 @@ public class BaseMainActivity extends BaseAppActivity{
 		GeneralUtils.restoreScreenTimeOut(BaseMainActivity.this);
 		super.onDestroy();
 	}
-	
+
 	protected void closeApp(){
 		GeneralUtils.restoreScreenTimeOut(BaseMainActivity.this);
 		Log.d(TAG, "Closing "+getString(R.string.app_name));

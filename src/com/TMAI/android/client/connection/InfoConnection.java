@@ -135,8 +135,8 @@ public class InfoConnection {
 			nameValuePairs.add(new BasicNameValuePair("tags", memoInfo.getKind()));
 			nameValuePairs.add(new BasicNameValuePair("url", memoInfo.getFileUrl()));
 			nameValuePairs.add(new BasicNameValuePair("mobile_version", OS_IDENTIFIER));
-/*			nameValuePairs.add(new BasicNameValuePair("duration", "10"));
-			nameValuePairs.add(new BasicNameValuePair("bitrate", "5"));*/
+			nameValuePairs.add(new BasicNameValuePair("duration", memoInfo.getDuration()));
+			nameValuePairs.add(new BasicNameValuePair("bitrate", memoInfo.getBitrate()));
 			
 
 			

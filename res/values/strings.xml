@@ -39,6 +39,18 @@
 	<string name="places_dialog_cancel_button">Cancel</string>
 	<string name="places_progress_dialog_title">Establishing connection</string>
 	<string name="places_progress_dialog_message">Connecting...</string>
+	<string name="places_menu_filter">Search fiter</string>
+	<string name="places_menu_refresh">Refresh</string>
+
+	
+	<!--places filter screen-->
+	<string name="places_filter_radius">Radius</string>
+	<string name="places_filter_save_button">Save</string>
+	<string name="places_filter_menu_reset">Reset fields</string>
+	<string name="places_filter_toast_successful_change">The changes were successfully saved</string>
+	<string name="places_filter_toast_unsuccessful_change">The changes were not successfully saved</string>
+	
+	
 
 	<!--project id input popup-->
 	<string name="input_titel_text">Business Id</string>
@@ -67,12 +79,15 @@
 
 
 	<!--main screen-->
+	<string name="main_menu_qr_scanner">QR Scanner</string>
+	
 	<string name="main_titel_text">Record and Upload your feedback</string><!--
 	<string name="main_enter_project">Enter business Id</string>
 	<string name="main_select_project">Select business from list</string>
 
 
 	--><string name="main_start_button">Start</string>
+	
 	<string name="main_stop_button">Stop</string>
 	<string name="main_record_button">Record</string>
 

@@ -7,13 +7,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -35,6 +36,12 @@ public class LocationActivity extends BaseAppActivity{
 
 	public static final int LOCATION_ACTIVITY = 101;
 	public static final String LOCATION_NAME = "location_name";
+
+	private static final int MENU_FILTER = 1011;
+	private static final int MENU_REFRESH = 1012;
+
+	/*public static final String LOCATION_NAME_GOOGLE = "location_name";
+	public static final String LOCATION_NAME_FOURSQUARE = "name";*/
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,8 +65,8 @@ public class LocationActivity extends BaseAppActivity{
 		});
 		new GooglePlacesConnectionTask().execute();
 	}
-	
-	
+
+
 	/**
 	 * @param location
 	 * @return the location name can't contain spaces (all spaces will be replaced with underscore)
@@ -124,7 +131,7 @@ public class LocationActivity extends BaseAppActivity{
 				pd.cancel();
 			}
 		}
-		
+
 
 		@Override
 		protected void onPreExecute() {
@@ -143,6 +150,8 @@ public class LocationActivity extends BaseAppActivity{
 				if (location==null){
 					return null;
 				}
+				/*location.setLatitude(40.714100);
+				location.setLongitude(-74.006300);*/
 				PlacesInRadius placesInRadius = new PlacesInRadius(location);
 				jsonArray = placesInRadius.getPlaces();
 			} catch (Exception e) {
@@ -154,4 +163,43 @@ public class LocationActivity extends BaseAppActivity{
 		}
 
 	}
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		menu.add(0, MENU_FILTER, 0, R.string.places_menu_filter);
+		menu.add(0, MENU_REFRESH, 0, R.string.places_menu_refresh);
+
+
+		return true;
+	}
+
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case MENU_FILTER:
+			Intent intent = new Intent(LocationActivity.this,LocationFilterActivity.class);
+			startActivity(intent);
+
+//			startActivityForResult(intent, LocationFilterActivity1.LOCATION_FILTER_ACTIVITY);
+			break;
+		case MENU_REFRESH:
+			new GooglePlacesConnectionTask().execute();
+			break;
+		}
+		return true;
+	}
+	
+/*	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == LocationFilterActivity1.LOCATION_FILTER_ACTIVITY){
+			if (data != null){
+				String locationName = data.getStringExtra(LocationFilterActivity1.LOCATION_FILTER_NAME);
+				if (locationName!=null){
+					//TODO refresh
+				}
+			}
+		}
+	}*/
+	
 }

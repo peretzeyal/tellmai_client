@@ -24,10 +24,10 @@ public class Places {
 		try {
 		this.id = jsonObject.getString("id");
 		this.name = jsonObject.getString("name");
-		JSONObject geometry = (JSONObject) jsonObject.get("geometry");
+/*		JSONObject geometry = (JSONObject) jsonObject.get("geometry");
 		JSONObject location = (JSONObject) geometry.get("location");
 		this.latitude = Double.valueOf(location.getString("lat"));
-		this.longitude = Double.valueOf(location.getString("lng"));
+		this.longitude = Double.valueOf(location.getString("lng"));*/
 		} catch (JSONException e) {
 			e.printStackTrace();
 		};

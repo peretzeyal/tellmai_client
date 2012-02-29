@@ -5,5 +5,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="C:/Dev/tellmai_client/lib/aws-android-sdk-1.0.4-core.jar"/>
 	<classpathentry kind="lib" path="C:/Dev/tellmai_client/lib/aws-android-sdk-1.0.4-s3.jar"/>
+	<classpathentry kind="lib" path="C:/Dev/tellmai_client/lib/core.jar"/>
+	<classpathentry kind="lib" path="C:/Dev/tellmai_client/lib/zxingjar-1.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

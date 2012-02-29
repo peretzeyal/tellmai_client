@@ -1,6 +1,8 @@
 package com.TMAI.android.client.prefs;
 
 
+import com.TMAI.android.client.location.PlacesInRadius;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -13,6 +15,9 @@ public class Prefs {
 	private static final String CONTACT_EMAIL = "contact_email";
 	private static final String AUDIO_FOLDER = "audio_folder";
 	private static final String OLD_SCREEN_TIMEOUT = "old_screen_timeout";
+	private static final String GOOGLE_PLACES_FILTER = "goolge_places_filter";
+	private static final String GOOGLE_PLACES_RADIUS = "goolge_places_radius";
+
 
 
 	private static SharedPreferences sharedPreferences;
@@ -66,7 +71,7 @@ public class Prefs {
 
 	//screen timeout
 	public static int getOldScreenTimeout() {
-		return sharedPreferences.getInt(OLD_SCREEN_TIMEOUT, 0);
+		return sharedPreferences.getInt(OLD_SCREEN_TIMEOUT, -1);
 	}
 
 	public static void setOldScreenTimeout(int value) {
@@ -74,5 +79,24 @@ public class Prefs {
 		editor.commit();
 	}
 	
+	//Google Places Filter
+	public static String getGooglePlacesFilter() {
+		return sharedPreferences.getString(GOOGLE_PLACES_FILTER, "");
+	}
+
+	public static void setGooglePlacesFilter(String value) {
+		editor.putString(GOOGLE_PLACES_FILTER, value);
+		editor.commit();
+	}
+	
+	//Google Places Radius
+	public static String getGooglePlacesRadius() {
+		return sharedPreferences.getString(GOOGLE_PLACES_RADIUS, PlacesInRadius.searchRadius);
+	}
+
+	public static void setGooglePlacesRadius(String value) {
+		editor.putString(GOOGLE_PLACES_RADIUS, value);
+		editor.commit();
+	}
 	
 }

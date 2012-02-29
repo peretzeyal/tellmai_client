@@ -22,6 +22,7 @@ public class AudioPlayer {
 	
 	public int playAudio(String file,final MainActivity mainActivity) {
 		try {
+			stopAudio();
 			mediaPlayer = new MediaPlayer();
 			mediaPlayer.reset();
 			mediaPlayer.setDataSource(file);
@@ -32,8 +33,8 @@ public class AudioPlayer {
 					if (mainActivity != null){
 						Log.d(TAG,"stop audio");
 						GuiUtils.stopDuraionProgressBarTimer();
-						GuiUtils.changeButtonState(mainActivity, RecordingButtonsState.STOPPED);
-
+						//GuiUtils.changeButtonState(mainActivity, RecordingButtonsState.STOPPED);
+						mainActivity.guiUpdate();
 					}
 				}
 			});
@@ -50,12 +51,40 @@ public class AudioPlayer {
 		return 0;
 	}
 	
+	public int getFileDuration(String file) {
+		try {
+			mediaPlayer = new MediaPlayer();
+			mediaPlayer.reset();
+			mediaPlayer.setDataSource(file);
+			mediaPlayer.prepare();
+
+			int duration = mediaPlayer.getDuration();
+			if (duration>0){
+				//return value in seconds
+				duration= duration/1000;
+			}
+			stopAudio();
+			return duration;
+		} catch (IOException e) {
+			Log.e(TAG,"problem playing audio file "+e);
+		}
+		return 0;
+	}
+	
+	
 	public void stopAudio(){
 		if(mediaPlayer != null){
 			mediaPlayer.stop();
 			mediaPlayer.release();
 			mediaPlayer = null;
 		}
+	}
+	
+	public boolean isPlaying(){
+		if (mediaPlayer!=null){
+			return mediaPlayer.isPlaying();
+		}
+		return false;
 	}
 
 }

@@ -49,103 +49,113 @@ public final class R {
         public static final int upload_button_back=0x7f020017;
     }
     public static final class id {
-        public static final int LinearLayout_email_message=0x7f060036;
-        public static final int LinearLayout_project=0x7f06000d;
-        public static final int LinearLayout_project_select=0x7f060014;
-        public static final int LinearLayout_reply_email=0x7f060026;
-        public static final int accept_button=0x7f060034;
-        public static final int allow_reply_cb=0x7f060027;
-        public static final int cancel_button=0x7f060006;
-        public static final int change_email_button=0x7f060028;
-        public static final int checkBox1=0x7f06001f;
-        public static final int checkBox2=0x7f060020;
-        public static final int checkBox3=0x7f060021;
-        public static final int disclaimer_tv=0x7f060029;
-        public static final int duration_progressBar=0x7f06001a;
-        public static final int email_input_et=0x7f060038;
-        public static final int email_message_tv=0x7f060037;
-        public static final int kind_1_button=0x7f060023;
-        public static final int kind_2_button=0x7f060024;
-        public static final int kind_3_button=0x7f060025;
-        public static final int linearLayout1=0x7f06000b;
-        public static final int linearLayout2=0x7f060009;
-        public static final int linearLayout3=0x7f06001e;
-        public static final int linearLayout4=0x7f060008;
-        public static final int linearLayout_audio=0x7f060016;
-        public static final int linearLayout_buttons=0x7f060004;
-        public static final int linearLayout_image=0x7f06002b;
-        public static final int linearLayout_kind=0x7f060022;
-        public static final int linearLayout_message=0x7f060002;
-        public static final int linearLayout_project_id=0x7f06000e;
-        public static final int linearLayout_project_name=0x7f060011;
-        public static final int linearLayout_record=0x7f060015;
-        public static final int linearLayout_save=0x7f06002a;
-        public static final int linearLayout_title=0x7f060000;
-        public static final int linearLayout_tos_buttons=0x7f060033;
-        public static final int linearLayout_type=0x7f06001c;
-        public static final int message_tv=0x7f060032;
-        public static final int ok_button=0x7f060005;
-        public static final int places_dialog_cancel_button=0x7f060030;
-        public static final int places_dialog_linearLayout_list=0x7f06002e;
-        public static final int places_dialog_list_lv=0x7f06002f;
-        public static final int places_dialog_row_text_tv=0x7f060031;
-        public static final int places_dialog_title_tv=0x7f06002d;
-        public static final int play_button=0x7f060017;
-        public static final int project_id_label_tv=0x7f06000f;
-        public static final int project_id_tv=0x7f060010;
-        public static final int project_name_label_tv=0x7f060012;
-        public static final int project_name_tv=0x7f060013;
-        public static final int record_button=0x7f060019;
-        public static final int reject_button=0x7f060035;
-        public static final int scrollView1=0x7f06000a;
-        public static final int scrollView2=0x7f060007;
-        public static final int send_button=0x7f06002c;
-        public static final int severity_ratingBar=0x7f06001d;
-        public static final int severity_tv=0x7f06001b;
-        public static final int stop_button=0x7f060018;
-        public static final int textView1=0x7f060001;
-        public static final int textView2=0x7f060003;
-        public static final int title_tv=0x7f06000c;
-        public static final int with_email_button=0x7f06003a;
-        public static final int without_email_button=0x7f060039;
+        public static final int LinearLayout_email_message=0x7f06003d;
+        public static final int LinearLayout_project=0x7f06000f;
+        public static final int LinearLayout_project_select=0x7f060016;
+        public static final int LinearLayout_reply_email=0x7f060028;
+        public static final int accept_button=0x7f06003b;
+        public static final int allow_reply_cb=0x7f060029;
+        public static final int cancel_button=0x7f060008;
+        public static final int change_email_button=0x7f06002a;
+        public static final int checkBox1=0x7f060021;
+        public static final int checkBox2=0x7f060022;
+        public static final int checkBox3=0x7f060023;
+        public static final int disclaimer_tv=0x7f06002b;
+        public static final int duration_progressBar=0x7f06001c;
+        public static final int email_input_et=0x7f06003f;
+        public static final int email_message_tv=0x7f06003e;
+        public static final int filter_listView=0x7f060037;
+        public static final int kind_1_button=0x7f060025;
+        public static final int kind_2_button=0x7f060026;
+        public static final int kind_3_button=0x7f060027;
+        public static final int linearLayout1=0x7f06000d;
+        public static final int linearLayout2=0x7f06000b;
+        public static final int linearLayout3=0x7f060020;
+        public static final int linearLayout4=0x7f06000a;
+        public static final int linearLayout_audio=0x7f060018;
+        public static final int linearLayout_buttons=0x7f060006;
+        public static final int linearLayout_image=0x7f06002d;
+        public static final int linearLayout_kind=0x7f060024;
+        public static final int linearLayout_message=0x7f060004;
+        public static final int linearLayout_project_id=0x7f060010;
+        public static final int linearLayout_project_name=0x7f060013;
+        public static final int linearLayout_radius=0x7f060034;
+        public static final int linearLayout_record=0x7f060017;
+        public static final int linearLayout_save=0x7f06002c;
+        public static final int linearLayout_title=0x7f060002;
+        public static final int linearLayout_tos_buttons=0x7f06003a;
+        public static final int linearLayout_type=0x7f06001e;
+        public static final int message_tv=0x7f060039;
+        public static final int ok_button=0x7f060007;
+        public static final int places_dialog_cancel_button=0x7f060032;
+        public static final int places_dialog_linearLayout_list=0x7f060030;
+        public static final int places_dialog_list_lv=0x7f060031;
+        public static final int places_dialog_row_text_tv=0x7f060033;
+        public static final int places_dialog_title_tv=0x7f06002f;
+        public static final int play_button=0x7f060019;
+        public static final int preview_view=0x7f060000;
+        public static final int project_id_label_tv=0x7f060011;
+        public static final int project_id_tv=0x7f060012;
+        public static final int project_name_label_tv=0x7f060014;
+        public static final int project_name_tv=0x7f060015;
+        public static final int radius_editText=0x7f060036;
+        public static final int radius_textView=0x7f060035;
+        public static final int record_button=0x7f06001b;
+        public static final int reject_button=0x7f06003c;
+        public static final int save_button=0x7f060038;
+        public static final int scrollView1=0x7f06000c;
+        public static final int scrollView2=0x7f060009;
+        public static final int send_button=0x7f06002e;
+        public static final int severity_ratingBar=0x7f06001f;
+        public static final int severity_tv=0x7f06001d;
+        public static final int stop_button=0x7f06001a;
+        public static final int textView1=0x7f060003;
+        public static final int textView2=0x7f060005;
+        public static final int title_tv=0x7f06000e;
+        public static final int viewfinder_view=0x7f060001;
+        public static final int with_email_button=0x7f060041;
+        public static final int without_email_button=0x7f060040;
     }
     public static final class layout {
-        public static final int login_screen=0x7f030000;
-        public static final int main_screen=0x7f030001;
-        public static final int places_dialog=0x7f030002;
-        public static final int places_dialog_row=0x7f030003;
-        public static final int tos_screen=0x7f030004;
+        public static final int capture=0x7f030000;
+        public static final int login_screen=0x7f030001;
+        public static final int main_screen=0x7f030002;
+        public static final int places_dialog=0x7f030003;
+        public static final int places_dialog_row=0x7f030004;
+        public static final int places_filter_dialog=0x7f030005;
+        public static final int places_filter_dialog_row=0x7f030006;
+        public static final int tos_screen=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
-        public static final int entity_validation_progress_dialog_message=0x7f05001e;
-        public static final int entity_validation_progress_dialog_title=0x7f05001d;
-        public static final int info_server_port=0x7f05003c;
-        public static final int info_server_url=0x7f05003b;
+        public static final int entity_validation_progress_dialog_message=0x7f050025;
+        public static final int entity_validation_progress_dialog_title=0x7f050024;
+        public static final int info_server_port=0x7f050044;
+        public static final int info_server_url=0x7f050043;
         /** <string name="input_another_memo_msg_text">This app will automatically close in *** sec.\nTo send additional feedback click</string>
 	
          */
-        public static final int input_another_memo_msg_text=0x7f050026;
-        public static final int input_another_memo_no_button=0x7f050028;
+        public static final int input_another_memo_msg_text=0x7f05002d;
+        public static final int input_another_memo_no_button=0x7f05002f;
         /** send another memo popup
          */
-        public static final int input_another_memo_title_text=0x7f050025;
-        public static final int input_another_memo_yes_button=0x7f050027;
-        public static final int input_cancel_button=0x7f05001b;
-        public static final int input_change_email_cancel_button=0x7f050022;
-        public static final int input_change_email_changed=0x7f050023;
-        public static final int input_change_email_error=0x7f050024;
-        public static final int input_change_email_message_text=0x7f050020;
-        public static final int input_change_email_ok_button=0x7f050021;
+        public static final int input_another_memo_title_text=0x7f05002c;
+        public static final int input_another_memo_yes_button=0x7f05002e;
+        public static final int input_cancel_button=0x7f050022;
+        public static final int input_change_email_cancel_button=0x7f050029;
+        public static final int input_change_email_changed=0x7f05002a;
+        public static final int input_change_email_error=0x7f05002b;
+        public static final int input_change_email_message_text=0x7f050027;
+        public static final int input_change_email_ok_button=0x7f050028;
         /** change email popup
          */
-        public static final int input_change_email_title_text=0x7f05001f;
-        public static final int input_message_text=0x7f050019;
-        public static final int input_ok_button=0x7f05001a;
-        public static final int input_project_id_error=0x7f05001c;
+        public static final int input_change_email_title_text=0x7f050026;
+        public static final int input_message_text=0x7f050020;
+        public static final int input_ok_button=0x7f050021;
+        public static final int input_project_id_error=0x7f050023;
         /** project id input popup
          */
-        public static final int input_titel_text=0x7f050018;
+        public static final int input_titel_text=0x7f05001f;
         public static final int login_cancel_button=0x7f05000c;
         public static final int login_ok_button=0x7f05000b;
         public static final int login_screen_message_text=0x7f05000a;
@@ -165,20 +175,23 @@ login screen
 		name="main_type_3_button">Type 3</string>
 	
          */
-        public static final int main_allow_reply_text=0x7f050031;
-        public static final int main_change_email_button=0x7f050032;
-        public static final int main_error_start_audio=0x7f050034;
-        public static final int main_kind_1_button=0x7f05002d;
-        public static final int main_kind_2_button=0x7f05002e;
-        public static final int main_kind_3_button=0x7f05002f;
-        public static final int main_label_disclaimer=0x7f050036;
-        public static final int main_label_project_id=0x7f050037;
-        public static final int main_label_project_name=0x7f050038;
+        public static final int main_allow_reply_text=0x7f050039;
+        public static final int main_change_email_button=0x7f05003a;
+        public static final int main_error_start_audio=0x7f05003c;
+        public static final int main_kind_1_button=0x7f050035;
+        public static final int main_kind_2_button=0x7f050036;
+        public static final int main_kind_3_button=0x7f050037;
+        public static final int main_label_disclaimer=0x7f05003e;
+        public static final int main_label_project_id=0x7f05003f;
+        public static final int main_label_project_name=0x7f050040;
         /** main screen labels
          */
-        public static final int main_label_severity=0x7f050035;
-        public static final int main_record_button=0x7f05002c;
-        public static final int main_send_button=0x7f050033;
+        public static final int main_label_severity=0x7f05003d;
+        /** main screen
+         */
+        public static final int main_menu_qr_scanner=0x7f050030;
+        public static final int main_record_button=0x7f050034;
+        public static final int main_send_button=0x7f05003b;
         /** 
 	<string name="main_enter_project">Enter business Id</string>
 	<string name="main_select_project">Select business from list</string>
@@ -186,12 +199,10 @@ login screen
 
 	
          */
-        public static final int main_start_button=0x7f05002a;
-        public static final int main_stop_button=0x7f05002b;
-        /** main screen
-         */
-        public static final int main_titel_text=0x7f050029;
-        public static final int main_upload_button=0x7f050030;
+        public static final int main_start_button=0x7f050032;
+        public static final int main_stop_button=0x7f050033;
+        public static final int main_titel_text=0x7f050031;
+        public static final int main_upload_button=0x7f050038;
         public static final int notification_entity_validation_msg_text=0x7f050008;
         public static final int notification_entity_validation_titel_text=0x7f050007;
         public static final int notification_upload_successfully_msg_text=0x7f050006;
@@ -202,6 +213,15 @@ login screen
         /** places screen
          */
         public static final int places_dialog_titel_text=0x7f050014;
+        public static final int places_filter_menu_reset=0x7f05001c;
+        /** places filter screen
+         */
+        public static final int places_filter_radius=0x7f05001a;
+        public static final int places_filter_save_button=0x7f05001b;
+        public static final int places_filter_toast_successful_change=0x7f05001d;
+        public static final int places_filter_toast_unsuccessful_change=0x7f05001e;
+        public static final int places_menu_filter=0x7f050018;
+        public static final int places_menu_refresh=0x7f050019;
         public static final int places_progress_dialog_message=0x7f050017;
         public static final int places_progress_dialog_title=0x7f050016;
         /** general string
@@ -219,9 +239,9 @@ login screen
         public static final int tos_title_text=0x7f05000d;
         public static final int tos_with_email_button=0x7f050010;
         public static final int tos_without_email_button=0x7f050011;
-        public static final int upload_file_server_port=0x7f05003a;
+        public static final int upload_file_server_port=0x7f050042;
         /** server connection
          */
-        public static final int upload_file_server_url=0x7f050039;
+        public static final int upload_file_server_url=0x7f050041;
     }
 }
